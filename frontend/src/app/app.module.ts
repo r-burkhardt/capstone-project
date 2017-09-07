@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {LayoutModule} from "./shared/layout/layout.module";
+import { LayoutModule } from "./shared/layout/layout.module";
+import { ResolveAssetPathPipe } from './core/pipes/resolve-asset-path.pipe';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import {LayoutModule} from "./shared/layout/layout.module";
   ],
   imports: [
     BrowserModule,
-    LayoutModule
+    LayoutModule,
+    // ResolveAssetPathPipe,
   ],
   providers: [],
   bootstrap: [AppComponent]
