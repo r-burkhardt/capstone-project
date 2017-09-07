@@ -1,9 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {ApplicationRef, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { LayoutModule } from "./shared/layout/layout.module";
 import { ResolveAssetPathPipe } from './core/pipes/resolve-asset-path.pipe';
+
+import { APP_RESOLVER_PROVIDERS } from './app.resolver';
+
+// Application wide providers
+const APP_PROVIDERS = [
+  ...APP_RESOLVER_PROVIDERS,
+];
 
 @NgModule({
   declarations: [
@@ -11,10 +17,13 @@ import { ResolveAssetPathPipe } from './core/pipes/resolve-asset-path.pipe';
   ],
   imports: [
     BrowserModule,
-    LayoutModule,
     // ResolveAssetPathPipe,
   ],
-  providers: [],
+  providers: [
+    APP_PROVIDERS,
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor( public appRef: ApplicationRef) {}
+}
