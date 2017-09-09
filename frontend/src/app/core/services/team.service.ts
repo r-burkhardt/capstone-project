@@ -26,6 +26,8 @@ export class Team implements Serializable<Team> {
     this.numOfPlayers = json.numOfPlayers;
     this.totalTeamRank = json.totalTeamRank;
     this.teamType = json.teamType;
+
+    return this;
   }
 
   clone(): Team {

@@ -4,13 +4,14 @@ import {Serializable} from "selenium-webdriver";
 @Injectable()
 export class PlayerService {
 
-  constructor() { }
+  constructor() {  }
 
 }
 
 export class Player implements Serializable<Player> {
 
   id = "";
+  status = "";
   firstName = "";
   lastName = "";
   email = "";
@@ -20,8 +21,16 @@ export class Player implements Serializable<Player> {
   age = "";
   height = "";
   yrsPlay = "";
-  playerInjuries = "";
-  playerPointAvg = "";
+  injuries = "";
+  pointAvg = "";
+
+  totalRank = "";
+  ageRank = "";
+  heightRank = "";
+  yrsPlayRank = "";
+  skillRank = "";
+  injuryRank = "";
+
 
   serialize(): string {
     return JSON.stringify(this);
@@ -38,8 +47,12 @@ export class Player implements Serializable<Player> {
     this.age = json.age;
     this.height = json.height;
     this.yrsPlay = json.yrsPlay;
-    this.playerInjuries = json.playerInjuries;
-    this.playerPointAvg= json.playerPointAvg;
+    this.injuries = json.injuries;
+    this.pointAvg = json.pointAvg;
+
+    this.totalRank = json.totalRank;
+
+    return this;
   }
 
   clone(): Player {
