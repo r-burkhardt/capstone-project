@@ -1,12 +1,12 @@
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [
   {
     path: "player",
-    loadChildren: ""
+    loadChildren: "app/player.module#PlayerModule"
   },
   {
     path: "organization",
-    loadChildren: ""
+    loadChildren: "app/organization.module#OrganizationModule"
   }
 ];
