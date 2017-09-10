@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { HeaderComponent } from './shared/layout/header/header.component';
+import { PlayerService, Player } from "./core/services/player.service";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,8 @@ import { HeaderComponent } from './shared/layout/header/header.component';
 })
 export class AppComponent {
 
-  @ViewChild(HeaderComponent) header;
+  player: Player;
   title = 'Team Builder';
 
-  constructor() {}
+  constructor(private playerService: PlayerService) {}
 }

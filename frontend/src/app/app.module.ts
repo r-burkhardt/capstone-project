@@ -6,6 +6,7 @@ import { ResolveAssetPathPipe } from './core/pipes/resolve-asset-path.pipe';
 
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import {HeaderModule} from "./shared/layout/header/header.module";
+import { PlayerComponent } from './player/player.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -15,6 +16,7 @@ const APP_PROVIDERS = [
 @NgModule({
   declarations: [
     AppComponent,
+    PlayerComponent,
   ],
   imports: [
     BrowserModule,
