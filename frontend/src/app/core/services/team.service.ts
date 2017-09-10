@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Serializable} from "selenium-webdriver";
 
 @Injectable()
 export class TeamService {

@@ -7,8 +7,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @ViewChild(HeaderComponent) header;
-
   constructor() { }
 
   ngOnInit() {

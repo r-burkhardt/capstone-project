@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HeaderComponent } from './shared/layout/header/header.component';
 
 @Component({
@@ -7,5 +7,9 @@ import { HeaderComponent } from './shared/layout/header/header.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  @ViewChild(HeaderComponent) header;
   title = 'Team Builder';
+
+  constructor() {}
 }

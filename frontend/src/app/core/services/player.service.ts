@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Serializable} from "selenium-webdriver";
 
 @Injectable()
 export class PlayerService {
@@ -17,8 +16,8 @@ export class Player implements Serializable<Player> {
   email = "";
   phone = "";
   zipCode = "";
-  organization = "";
-  age = "";
+  organizationId = "";
+  birthday = "";
   height = "";
   yrsPlay = "";
   injuries = "";
@@ -38,19 +37,25 @@ export class Player implements Serializable<Player> {
 
   deserialize(json) {
     this.id = json.id;
+    this.status = json.status;
     this.firstName = json.firstName;
     this.lastName = json.lastName;
     this.email = json.email;
     this.phone = json.phone;
     this.zipCode = json.zipCode;
-    this.organization = json.organization;
-    this.age = json.age;
+    this.organizationId = json.organizationId;
+    this.birthday = json.birthday;
     this.height = json.height;
     this.yrsPlay = json.yrsPlay;
     this.injuries = json.injuries;
     this.pointAvg = json.pointAvg;
 
     this.totalRank = json.totalRank;
+    this.ageRank = json.ageRank;
+    this.heightRank = json.heightRank;
+    this.yrsPlayRank = json.yrsPlayRank;
+    this.skillRank = json.skillRank;
+    this.injuryRank = json.injuryRank;
 
     return this;
   }
