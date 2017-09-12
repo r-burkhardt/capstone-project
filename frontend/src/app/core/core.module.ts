@@ -12,7 +12,6 @@ import {TeamService} from './services/team.service';
   ],
   declarations: [],
   providers: [
-
     // Services
     AssetUrlService,
     PlayerService,

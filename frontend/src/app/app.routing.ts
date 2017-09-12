@@ -2,11 +2,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: "",
+    loadChildren: "app/"
+  },
+  {
     path: "player",
-    loadChildren: "app/player.module#PlayerModule"
+    loadChildren: "app/player/lplayer.module#PlayerModule"
   },
   {
     path: "organization",
-    loadChildren: "app/organization.module#OrganizationModule"
+    loadChildren: "app/organization/organization.module#OrganizationModule"
   }
 ];
