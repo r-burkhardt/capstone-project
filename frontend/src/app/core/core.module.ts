@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AssetUrlService} from "./services/asset-url.service";
-import {PlayerService} from "./services/player.service";
-import {TeamService} from "./services/team.service";
+
+// Service Imports
+import {AssetUrlService} from './services/asset-url.service';
+import {PlayerService} from './services/player.service';
+import {TeamService} from './services/team.service';
 
 @NgModule({
   imports: [
@@ -10,6 +12,8 @@ import {TeamService} from "./services/team.service";
   ],
   declarations: [],
   providers: [
+
+    // Services
     AssetUrlService,
     PlayerService,
     TeamService
