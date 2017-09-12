@@ -13,5 +13,5 @@ export class AppComponent {
   player: Player;
   title = 'Team Builder';
 
-  constructor(private playerService: PlayerService) {}
+  constructor() {}
 }
