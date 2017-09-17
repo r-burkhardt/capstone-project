@@ -1,14 +1,12 @@
 module.exports = function(app) {
-    var playerController = require('../controllers/player');
+    var organizationController = require('../controllers/organization');
+
+    app.get('/services/v1/org', organizationController.getAllOrgs);
+    app.get('/services/v1/org/:id', organizationController.getOrg);
+    app.get('/services/v1/org/near/:lat/:long/:distance', organizationController.getOrgNear);
+    app.post('/services/v1/org/create', organizationController.createOrg);
+    app.put('/services/v1/org/update/:id', organizationController.updateOrg);
+    app.delete('/services/v1/org/delete/:id', organizationController.deleteOrg);
     
-    var baseURL = '/services/v1/';
-    
-    app.get('/services/v1/player', playerController.getAllPlayers);
-    app.get('/services/v1/player', playerController.getAllPlayers);
-    app.get('/services/v1/player/near/:lat/:long', playerController.getPlayersNear);
-    app.post('/services/v1/player/create', playerController.createProfile);
-    app.put('/services/v1/player/update', playerController.updateProfile);
-    app.delete('/services/v1/player/delete', playerController.delete);
-    
-    playerController.setDBConnectionsFromApp(app);
+    organizationController.setDBConnectionsFromApp(app);
 }

@@ -1,14 +1,11 @@
 module.exports = function(app) {
-    var playerController = require('../controllers/player');
+    var usersController = require('../controllers/users');
+
+    app.get('/services/v1/users', usersController.getAllUsers);
+    app.get('/services/v1/users/:id', usersController.getUser);
+    app.post('/services/v1/users/create', usersController.createUser);
+    app.put('/services/v1/users/update/:id', usersController.updateUser);
+    app.delete('/services/v1/users/delete/:id', usersController.deleteUser);
     
-    var baseURL = '/services/v1/';
-    
-    app.get('/services/v1/player', playerController.getAllPlayers);
-    app.get('/services/v1/player', playerController.getAllPlayers);
-    app.get('/services/v1/player/near/:lat/:long', playerController.getPlayersNear);
-    app.post('/services/v1/player/create', playerController.createProfile);
-    app.put('/services/v1/player/update', playerController.updateProfile);
-    app.delete('/services/v1/player/delete', playerController.delete);
-    
-    playerController.setDBConnectionsFromApp(app);
+    usersController.setDBConnectionsFromApp(app);
 }
