@@ -3,6 +3,7 @@ var assert = require('assert');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var bodyParser = require('body-parser');
+var format = require('date.format.js');
 var path = require('path');
 
 var app = express();
@@ -20,6 +21,9 @@ var env_value = process.argv[3];
 console.log("program_name=" + program_name);
 console.log("script_path=" + script_path);
 console.log("port_string=" + port_string);
+console.log("ene_value=" + env_value);
+console.log("today in Unix=" + Date.now() / 1000);
+console.log("today in Readable=" + new Date().format('c'));
 
 var port_value = "4500";
 
@@ -33,7 +37,13 @@ if (env_value === "undefined") {
 } else {
     switch (env_value) {
         case "DEV":
-            mongodbURL = "mongodb://104.198.193.53:27017/TeamBuilder";
+            mongodbURL = "mongodb://localhost:27017/teambuilder";
+            console.log("enviroment = " + mongodbURL);
+            break;
+            
+        case "PROD":
+            // mongodbURL = "mongodb://104.198.193.53:27017/TeamBuilder";
+            mongodbURL = "mongodb://127.0.0.1:27017/TeamBuilder";
             console.log("enviroment = " + mongodbURL);
             break;
 
@@ -51,5 +61,36 @@ console.log(app.get('public'));
 
 app.use(express.static(app.get('public')));
 
-app.listen(Number(port_value));
-console.log('Server is running on port ' + port_value);
+MongoClient.connect(mongodbURL, function ( err, dbConnection ) {
+    assert.equal(null, err);
+    console.log("connected successfully to mongodb server: " + mongodbURL);
+    db = dbConnection;
+    app.set("dbConnection", dbConnection);
+    
+    // create location index in players for latLong to 2d location
+    var playersCollection = dbConnection.collection("players");
+    playersCollection.createIndex({"latLong":"2d"});
+    
+    // Modules that interact with the controllers
+    // require('./routes/authenticate')(app);
+    // require('./routes/organizations')(app);
+    require('./routes/players')(app);
+    // require('./routes/users')(app);
+    // require('./routes/zipcodes')(app);
+    
+    // Handle 404 issues
+    app.use(function(req, res, next) {
+        res.status(404);
+        res.sendFile(path.join(__dirname, './public', '404.html'));
+    });
+    
+    // Handle stack trace errors
+    app.use(function(err, req, res, next) {
+        console.error(err.stack);
+        res.status(500);
+        res.sendFile(path.join(__dirname, './public', '500.html'));
+    });
+    
+    app.listen(Number(port_value));
+    console.log('Server Running on port ' + port_value);
+});
