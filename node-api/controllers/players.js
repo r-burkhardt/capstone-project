@@ -35,14 +35,12 @@ exports.getAllPlayers = function (req, res) {
                 newPlayer.heightInch = player.height[1];
                 newPlayer.yearsPlay = player.yearsPlay;
                 // Loop through injuries to add to injury item
-                // var injury = {};
-                var i;
+                // var i;
                 var injuryList = [];
                 for (i = 0; i < player.injuries.length; i++) {
                     injuryList.push( player.injuries[ i ]);
                 }
                 newPlayer.injuries = injuryList;
-                //newPlayer.injuries = player.injuries;
                 newPlayer.pointAvg = player.pointAvg;
                 // Player ranking
                 newPlayer.totalRank = player.totalRank;
@@ -51,7 +49,7 @@ exports.getAllPlayers = function (req, res) {
                 // newPlayer.yrsPlayRank = player.yrsPlayRank;
                 // newPlayer.skillRank = player.skillRank;
                 // newPlayer.injuryRank = player.injuryRank;
-                // PLayer modifications
+                // Player modifications
                 newPlayer.dateCreated = player.dateCreated;
                 newPlayer.dateLastModified = player.dateLastModified;
 
@@ -93,7 +91,13 @@ exports.getPlayer = function (req, res) {
             newPlayer.heightFeet = player.height[0];
             newPlayer.heightInch = player.height[1];
             newPlayer.yearsPlay = player.yearsPlay;
-            newPlayer.injuries = player.injuries;
+            // Loop through injuries to add to injury item
+            // var i;
+            var injuryList = [];
+            for (i = 0; i < player.injuries.length; i++) {
+                injuryList.push( player.injuries[ i ]);
+            }
+            newPlayer.injuries = injuryList;
             newPlayer.pointAvg = player.pointAvg;
             // Player ranking
             newPlayer.totalRank = player.totalRank;
@@ -118,8 +122,9 @@ exports.getPlayer = function (req, res) {
 exports.getPlayersNearBy = function (req, res) {
     var latitude = req.params.latitude;
     var longitude = req.params.longitude;
+    var distance = (req.params.distance * 1609.34);
     
-    var players = collection.find({"loc":{$near:[parseFloat(latitude), parseFloat(longitude)]}}, function (err, docsCursor) {
+    var players = collection.find({"latLong":{$near:[parseFloat(latitude), parseFloat(longitude)], $maxDistance: parseFloat(distance)}}, function (err, docsCursor) {
         res.type('application/json');
         if (err) {
             res.status(500);
@@ -146,13 +151,12 @@ exports.getPlayersNearBy = function (req, res) {
                 newPlayer.heightInch = player.height[1];
                 newPlayer.yearsPlay = player.yearsPlay;
                 // Loop through injuries to add to injury item
-                var injury;
-                var i;
+                // var i;
                 var injuryList = [];
-                for (i = 0; i < player.injuries.length(); i++) {
-                    injuryList.push(this[ "injury" + i ] = player.injuries[ i ]);
+                for (i = 0; i < player.injuries.length; i++) {
+                    injuryList.push( player.injuries[ i ]);
                 }
-                newPlayer.injuries = {injuries : injuryList};
+                newPlayer.injuries = injuryList;
                 newPlayer.pointAvg = player.pointAvg;
                 // Player ranking
                 newPlayer.totalRank = player.totalRank;
@@ -161,7 +165,7 @@ exports.getPlayersNearBy = function (req, res) {
                 // newPlayer.yrsPlayRank = player.yrsPlayRank;
                 // newPlayer.skillRank = player.skillRank;
                 // newPlayer.injuryRank = player.injuryRank;
-                // PLayer modifications
+                // Player modifications
                 newPlayer.dateCreated = player.dateCreated;
                 newPlayer.dateLastModified = dateLastModified;
 
