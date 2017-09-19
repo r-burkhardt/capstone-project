@@ -2,7 +2,7 @@ var dbConnection;
 var collection;
 
 exports.setDBConnectionsFromApp = function (app) {
-    dbConnection = app.get("dbConnection")
+    dbConnection = app.get("dbConnection");
     userCollection = dbConnection.collection("zipcodes");
 
 }

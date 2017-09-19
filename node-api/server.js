@@ -8,6 +8,10 @@ var path = require('path');
 
 var app = express();
 
+// Register JSON body parsing for Post, Updates, Deletes, etc.
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
+
 // Database Connection Information
 var db;
 var mongodbURL;
@@ -76,7 +80,7 @@ MongoClient.connect(mongodbURL, function ( err, dbConnection ) {
     // require('./routes/organizations')(app);
     require('./routes/players')(app);
     // require('./routes/users')(app);
-    // require('./routes/zipcodes')(app);
+    require('./routes/zipcodes')(app);
     
     // Handle 404 issues
     app.use(function(req, res, next) {
