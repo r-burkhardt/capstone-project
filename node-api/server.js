@@ -78,9 +78,9 @@ MongoClient.connect(mongodbURL, function ( err, dbConnection ) {
     // Modules that interact with the controllers
     // require('./routes/authenticate')(app);
     // require('./routes/organizations')(app);
-    require('./routes/players')(app);
+    require('./routes/player')(app);
     // require('./routes/users')(app);
-    require('./routes/zipcodes')(app);
+    require('./routes/zipcode')(app);
     
     // Handle 404 issues
     app.use(function(req, res, next) {

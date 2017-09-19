@@ -3,10 +3,10 @@ var collection;
 
 exports.setDBConnectionsFromApp = function (app) {
     dbConnection = app.get("dbConnection");
-    collection = dbConnection.collection("zipcodes");
+    collection = dbConnection.collection("zipcode");
 }
 
-exports.getAllZipcodes = function (req, res) {
+exports.getAllZipcode = function (req, res) {
     
     var zipcodes = collection.find({}, function (err, docsCursor) {
         res.type('application/json');

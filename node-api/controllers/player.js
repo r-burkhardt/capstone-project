@@ -4,10 +4,10 @@ var ObjectID = require('mongodb').ObjectID;
 
 exports.setDBConnectionsFromApp = function (app) {
     dbConnection = app.get("dbConnection");
-    collection = dbConnection.collection("players");
+    collection = dbConnection.collection("player");
 }
 
-exports.getAllPlayers = function (req, res) {
+exports.getAllPlayer = function (req, res) {
     var players = collection.find({}, function (err, docsCursor) {
         res.type('application/json');
         if (err) {
@@ -121,7 +121,7 @@ exports.getPlayer = function (req, res) {
     });
 }
 
-exports.getPlayersNearBy = function (req, res) {
+exports.getPlayerNearBy = function (req, res) {
     var latitude = req.params.lat;
     var longitude = req.params.long;
     var distance = ((req.params.distance * 1.60934 ) / 6371 ); // distance in miles divided by 3959, in km / 6371

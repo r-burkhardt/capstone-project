@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    var organizationController = require('../controllers/organizations');
+    var organizationController = require('../controllers/organization');
 
     app.get('/services/v1/org', organizationController.getAllOrgs);
     app.get('/services/v1/org/:id', organizationController.getOrg);
