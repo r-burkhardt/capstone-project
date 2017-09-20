@@ -92,11 +92,11 @@ exports.createUser = function (req, res) {
 
 exports.updateUser = function (req, res) {
     var user = req.body;
-    user.dateLastModified + new Date().format('c');
+    user.dateLastModified = new Date().format('c');
     
     var objID;
     try {
-        objID + ObjectID(req.params.id);
+        objID = ObjectID(req.params.id);
     } catch (e) {
         res.status(500);
         res.send({success:false, msg:"Invalid user id"});
