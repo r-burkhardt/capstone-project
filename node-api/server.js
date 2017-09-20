@@ -79,7 +79,7 @@ MongoClient.connect(mongodbURL, function ( err, dbConnection ) {
     // require('./routes/authenticate')(app);
     // require('./routes/organizations')(app);
     require('./routes/player')(app);
-    // require('./routes/users')(app);
+    require('./routes/user')(app);
     require('./routes/zipcode')(app);
     
     // Handle 404 issues

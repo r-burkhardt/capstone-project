@@ -214,7 +214,7 @@ exports.createPlayer = function (req, res) {
     
         if ( returnPlayer != null ) {
             res.status ( 201 );
-            res.json ( newPlayer );
+            res.json ( { success:true, msg: "Player Created" } );
         } else {
             res.status ( 400 );
             res.json ( { success: false, msg: "Player creation failed" } );
@@ -225,7 +225,6 @@ exports.createPlayer = function (req, res) {
 exports.updatePlayer = function (req, res) {
     var player = req.body;
     player.dateLastModified = new Date().format('c'); //parseInt(Date.now() / 1000, 10);
-    console.log(player);
 
     // Check for valid objectID
     var objID;
