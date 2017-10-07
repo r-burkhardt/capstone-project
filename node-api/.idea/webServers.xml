@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="7f878f26-7d28-4b0e-a3f6-5b30543a5ea4" name="node api" url="http://104.198.193.53">
+        <fileTransfer host="104.198.193.53" port="22" privateKey="$USER_HOME$/keys/bitnami-google-bitnami-5fu-9hdduq.pem" rootFolder="/home/bitnami/apps/services" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

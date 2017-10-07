@@ -15,6 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true}));
 // Database Connection Information
 var db;
 var mongodbURL;
+var apiAccess = "tbaccess";
+var apiToken = "8{uKsnpqp)VpbJE)";
 
 // Get enviromental variables
 var program_name = process.argv[0];
@@ -47,7 +49,8 @@ if (env_value === "undefined") {
             
         case "PROD":
             // mongodbURL = "mongodb://104.198.193.53:27017/TeamBuilder";
-            mongodbURL = "mongodb://127.0.0.1:27017/TeamBuilder";
+            //mongodbURL = "mongodb://127.0.0.1:27017/teambuilder";
+            mongodbURL = "mongodb://" + apiAccess + ":" + apiToken + "@127.0.0.1:27017/teambuilder";
             console.log("enviroment = " + mongodbURL);
             break;
 
