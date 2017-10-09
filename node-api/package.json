@@ -4,6 +4,7 @@
   "description": "This is the api for teambuilder app to access the application data",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js 4500 PROD",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Roderick Burkhardt & Faiga Revah",
