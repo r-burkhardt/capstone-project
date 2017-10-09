@@ -1,0 +1,94 @@
+<div class="login-page">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4 text-center">
+      <img src="assets/images/logo.png" width="100px" class="user-avatar" />
+      <h1>Create Profile</h1>
+      <form role="form">
+        <div class="form-content">
+          <div class="form-group">
+            <label id="ageLabel" class="descriptionlabel">Age:</label>&nbsp;&nbsp;
+            <select id="AgeDropdown" value="Gender" class="dropdowns">
+              <option disabled selected value> Select </option>
+              <option value="under12">Under 12</option>
+              <option value="12to14">12 - 14</option>
+              <option value="15to20">15 - 20</option>
+              <option value="21to30">21 - 30</option>
+              <option value="31to40">31 - 40</option>
+              <option value="41to50">41 - 50</option>
+              <option value="51to60">51 - 60</option>
+              <option value="61up">61 and above</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label id="genderLabel" class="descriptionlabel">Gender:</label>&nbsp;&nbsp;
+            <select id="genderDropdown" value="Gender" class="dropdowns">
+              <option disabled selected value> Select </option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="nonbinary">Non-binary/Third Gender</option>
+              <option value="decline">Prefer not to say</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label id="physicalCond" class="descriptionlabel">Physical Conditioning:</label>&nbsp;&nbsp;
+            <select id="condDropdown" value="Condition" class="dropdowns">
+              <option disabled selected value> Select </option>
+              <option value="poor">Poor</option>
+              <option value="avg">Average</option>
+              <option value="good">Good</option>
+              <option value="excellent">Excellent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label id="hght" class="descriptionlabel">Height:</label>&nbsp;&nbsp;
+            <select id="hghtDropdown" value="Height" class="dropdowns">
+              <option disabled selected value> Select </option>
+              <option value="under5-2">Below 5'</option>
+              <option value="5-2to5-5">5'1'' - 5'5''</option>
+              <option value="5-6to5-8">5'6'' - 5'8''</option>
+              <option value="5-9to6-0">5'9'' - 6'0''</option>
+              <option value="6-1to6-5">6'1'' - 6'5''</option>
+              <option value="6-6andup">6'6'' and above</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label id="exp" class="descriptionlabel">Experience Level/Skills:</label>&nbsp;&nbsp;
+            <select id="skillDropdown" value="Skill" class="dropdowns">
+              <option disabled selected value> Select </option>
+              <option value="beg">Beginner</option>
+              <option value="int">Intermediate</option>
+              <option value="adv">Advanced</option>
+              <option value="prof">Michael Jordan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label id="injuries" class="descriptionlabel">Injuries or Health Restrictions:</label>&nbsp;&nbsp;
+            <select id="HealthDropdown" value="Health" class="dropdowns">
+              <option disabled selected value> Select </option>
+              <option value="arm">Arm Injury</option>
+              <option value="wrist">Wrist Inujury</option>
+              <option value="knee">Knee Injury</option>
+              <option value="leg">Leg Injury</option>
+              <option value="heart">Heart Condition</option>
+              <option value="asthma">Asthma</option>
+              <option value="none">No injuries or restrictions</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label id="org" class="descriptionlabel">Organization</label>&nbsp;&nbsp;
+            <select id="orgDropdown" value="organization" class="dropdowns">
+              <option disabled selected value> Select </option>
+              <option value="arm">San Francisco Gay Basketball Association</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" class="input-underline input-lg" id="zip" placeholder="Zipcode">
+          </div>
+        </div>
+
+        <a class="btn rounded-btn" (click)="onCreateProfile()"> Create Profile </a>
+      </form>
+    </div>
+  </div>
+</div>
