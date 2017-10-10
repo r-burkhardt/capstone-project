@@ -17,7 +17,7 @@ export class PlayerService {
       observable = this.apiService.get(uri);
     } else {
       const json = { ids: id };
-      observable = this.apiService.remoteCall("getPlayers", JSON.stringify(json));
+      observable = this.apiService.remoteCall("getPlayer", JSON.stringify(json));
     }
 
     return observable.map(response => {

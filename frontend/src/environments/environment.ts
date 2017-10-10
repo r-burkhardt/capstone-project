@@ -6,6 +6,6 @@
 export const environment = {
   name: "local",
   // production: false,
-  restApiUrl: "http://104.198.193.53/services",
-  accesstoken: null,
+  restApiUrl: "http://104.198.193.53:4500/services",
+  // accesstoken: null,
 };
