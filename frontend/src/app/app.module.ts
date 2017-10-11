@@ -9,9 +9,9 @@ import { HeaderModule } from './shared/layout/header/header.module';
 import { PlayerComponent } from './player/player.component';
 import { CoreModule } from "./core/core.module";
 import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './shared/login/login.component';
+import { SignupComponent } from './shared/create-user/create-user.component';
+import { ProfileComponent } from './shared/create-profile/create-profile.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
