@@ -8,6 +8,10 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HeaderModule } from './shared/layout/header/header.module';
 import { PlayerComponent } from './player/player.component';
 import { CoreModule } from "./core/core.module";
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -18,6 +22,10 @@ const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     PlayerComponent,
+    HeaderComponent,
+    LoginComponent,
+    SignupComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +37,7 @@ const APP_PROVIDERS = [
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor() {}
 }
