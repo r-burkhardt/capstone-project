@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { HeaderComponent } from './shared/layout/header/header.component';
-import { PlayerService, Player } from './core/services/player.service';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+// import { HeaderComponent } from './shared/layout/header/header.component';
+// import { PlayerService, Player } from './core/services/player.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,8 @@ import { PlayerService, Player } from './core/services/player.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public title = 'Team Builder';
 
-  player: Player;
-  title = 'Team Builder';
+  public constructor(private viewContainerRef: ViewContainerRef) {}
 
-  constructor() {}
 }

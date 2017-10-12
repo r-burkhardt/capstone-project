@@ -6,12 +6,13 @@ import { ResolveAssetPathPipe } from './core/pipes/resolve-asset-path.pipe';
 
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HeaderModule } from './shared/layout/header/header.module';
-import { PlayerComponent } from './player/player.component';
-import { CoreModule } from "./core/core.module";
-import { HeaderComponent } from './header/header.component';
+// import { PlayerComponent } from './player/player.component';
+import { CoreModule } from './core/core.module';
+// import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './shared/login/login.component';
 import { SignupComponent } from './shared/create-user/create-user.component';
 import { ProfileComponent } from './shared/create-profile/create-profile.component';
+import {MenuModule} from './shared/layout/menu/menu.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -21,8 +22,8 @@ const APP_PROVIDERS = [
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerComponent,
-    HeaderComponent,
+    // PlayerComponent,
+    // HeaderComponent,
     LoginComponent,
     SignupComponent,
     ProfileComponent,
@@ -30,6 +31,7 @@ const APP_PROVIDERS = [
   imports: [
     BrowserModule,
     HeaderModule,
+    MenuModule,
     CoreModule,
   ],
   providers: [

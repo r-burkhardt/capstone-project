@@ -5,6 +5,8 @@
  */
 
 export const apiConfig: any = {
-  restApiUrl: "",
-  // accessToken: "",
+  production: '',
+  restApiUrl: '',
+  accessToken: '',
+  userId: '',
 };

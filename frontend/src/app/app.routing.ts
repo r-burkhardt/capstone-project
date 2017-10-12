@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
+import {ModuleWithProviders} from "@angular/core/src/core";
 
 export const routes: Routes = [
   {
@@ -7,10 +8,12 @@ export const routes: Routes = [
   },
   {
     path: "player",
-    loadChildren: "app/player/lplayer.module#PlayerModule"
+    loadChildren: "app/player/player.module#PlayerModule"
   },
   {
     path: "organization",
     loadChildren: "app/organization/organization.module#OrganizationModule"
   }
 ];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
