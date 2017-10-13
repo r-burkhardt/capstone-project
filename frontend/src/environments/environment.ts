@@ -4,8 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  name: "local",
-  // production: false,
-  restApiUrl: "http://104.198.193.53:4500/services",
-  // accesstoken: null,
+  name: 'local',
+  production: false,
+  restApiUrl: 'http://104.198.193.53:4500/services',
+  accessToken: '',
+  userId: '',
 };
