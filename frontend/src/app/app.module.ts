@@ -5,14 +5,12 @@ import { AppComponent } from './app.component';
 import { ResolveAssetPathPipe } from './core/pipes/resolve-asset-path.pipe';
 
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { HeaderModule } from './shared/layout/header/header.module';
 // import { PlayerComponent } from './player/player.component';
 import { CoreModule } from './core/core.module';
-// import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './shared/login/login.component';
-import { SignupComponent } from './shared/create-user/create-user.component';
-import { ProfileComponent } from './shared/create-profile/create-profile.component';
-import {MenuModule} from './shared/layout/menu/menu.module';
+// import { LoginComponent } from './shared/login/login.component';
+// import { SignupComponent } from './shared/create-user/create-user.component';
+// import { ProfileComponent } from './shared/create-profile/create-profile.component';
+import { TBadminModule } from './shared/tbadmin.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -23,16 +21,15 @@ const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     // PlayerComponent,
-    // HeaderComponent,
-    LoginComponent,
-    SignupComponent,
-    ProfileComponent,
+    // LoginComponent,
+    // SignupComponent,
+    // ProfileComponent,
   ],
   imports: [
     BrowserModule,
-    HeaderModule,
-    MenuModule,
+    // MenuModule,
     CoreModule,
+    TBadminModule,
   ],
   providers: [
     APP_PROVIDERS,
