@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import {ModuleWithProviders} from "@angular/core/src/core";
+// import {ModuleWithProviders} from "@angular/core/src/core";
 
 export const routes: Routes = [
   {
@@ -16,4 +16,4 @@ export const routes: Routes = [
   }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
+// export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
