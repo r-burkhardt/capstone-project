@@ -6,14 +6,16 @@ import {OrganizationComponent} from './organization/organization.component';
 
 const routes: Routes = [
   {
+    // path: "",
+    // loadChildren: "pages/home/home.module#HomeModule",
     path: "",
-    component: PagesComponent,
-    children: [
-      { path: "", redirectTo: 'home', pathMatch: 'full'},
-      { path: "organization", component: OrganizationComponent }
-    ]
+    component: HomeComponent
+    // children: [
+    //   { path: "", redirectTo: 'home', pathMatch: 'full'},
+    //   { path: "organization", component: OrganizationComponent }
+    // ]
   }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
