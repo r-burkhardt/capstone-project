@@ -4,12 +4,14 @@ import { ModuleWithProviders } from '@angular/core/src/core';
 
 // import { PagesModule } from './pages/pages.module';
 import { HomeComponent } from './pages/home/home.component';
-import { OrganizationComponent } from './pages/organization/organization.component';
+import { OrganizationsComponent } from './pages/organizations/organizations.component';
+import { PlayersComponent } from './pages/players/players.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent }, // loadChildren: 'app/pages/home/home.module#HomeModule' }, //component: HomeComponent },
-  // { path: 'organization', component: OrganizationComponent } // loadChildren: 'app/pages/organization/organization.module#OrganizationModule' } //component: OrganizationComponet },
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
+  { path: 'organizations', component: OrganizationsComponent },
+  { path: 'players', component: PlayersComponent }
 ];
 
 @NgModule({

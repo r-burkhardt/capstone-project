@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 // import { HeaderComponent } from './shared/layout/header/header.component';
-// import { PlayerService, Player } from './core/services/player.service';
+// import { PlayerService, Player } from './core/services/players.service';
 
 @Component({
   selector: 'app-root',
