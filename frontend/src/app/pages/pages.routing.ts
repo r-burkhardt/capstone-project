@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { PagesModule } from './pages.module';
 import { PagesComponent } from './pages.component';
 import { HomeComponent } from './home/home.component';
-import {OrganizationComponent} from './organization/organization.component';
 
 const routes: Routes = [
   {
-    // path: "",
-    // loadChildren: "pages/home/home.module#HomeModule",
-    path: "",
-    component: HomeComponent
-    // children: [
-    //   { path: "", redirectTo: 'home', pathMatch: 'full'},
-    //   { path: "organization", component: OrganizationComponent }
-    // ]
+    path: '',
+    component: PagesComponent,
+    children: [
+      { path: '', redirectTo: '/home', pathMatch: 'full'},
+      { path: 'home', loadChildren: './home/home.module#HomeModule' },
+    //   { path: 'organization', loadChildren: './organization/organization.module#OrganizationModule' }
+    ]
   }
 ];
 

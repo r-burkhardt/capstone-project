@@ -7,7 +7,8 @@ import { ResolveAssetPathPipe } from './core/pipes/resolve-asset-path.pipe';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { CoreModule } from './core/core.module';
 import { TBadminModule } from './shared/tbadmin.module';
-import {PagesModule} from './pages/pages.module';
+import { PagesModule } from './pages/pages.module';
+import { AppRoutingModule } from './app.routing';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -22,7 +23,8 @@ const APP_PROVIDERS = [
     BrowserModule,
     CoreModule,
     TBadminModule,
-    PagesModule
+    PagesModule,
+    AppRoutingModule
   ],
   providers: [
     APP_PROVIDERS,
