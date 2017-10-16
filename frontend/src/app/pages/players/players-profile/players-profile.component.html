@@ -1,33 +1,68 @@
 <div class="container-fluid">
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-    <h2 class="player-profile-name">
-      Player Name
-    <!--{{player.name}}-->
-    </h2>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
-    <!--<div class="thumbnail">-->
-    <img class="img-responsive player-profile-pic" src="../../../../assets/images/default-player-profile-pic.jpg">
-    <!--</div>-->
-  </div>
-  <div class="col-xs-12 col-sm-7 col-md-5 col-lg-4">
-    <!--<div class="form-control">-->
-      <!--<form>-->
-        <input type="hidden" name="id"> <!--[(value)]="player.id"-->
-    <div class="input-group">
-      <span class="input-group-addon">Age:</span>
-      <input type="text" class="form-control" value="42" disabled>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+      <h2 class="player-profile-name">
+        <!--Player Name<br />-->
+        {{testPlayer.firstName}} {{testPlayer.lastName}}
+        <span class="small">San Jose, CA</span>
+      </h2>
     </div>
-    <div class="input-group">
-      <span class="input-group-addon">Gender</span>
-      <input type="text" class="form-control" value="male" disabled >
-    </div>
-    <!--<label>Age: </label>-->
-      <!--</form>-->
-    <!--</div>-->
   </div>
-</div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+      <!--<div class="text-center">-->
+        <img class="img-responsive player-profile-pic" src="../../../../assets/images/default-player-profile-pic.jpg">
+      <!--</div>-->
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+      <div class="col-xs-12 col-sm-12 col-md-10">
+        <div class="row">
+          <!--<div class="alert alert-success" role="alert">-->
+          <div class="alert-success">
+            <label class="col-xs-6 col-sm-5 col-md-4 text-right">Player Ranking:</label>
+            <span class="col-xs-6 col-sm-7 col-md-6"><strong>23</strong></span>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-xs-6 col-sm-5 col-md-4 text-right">Age:</label>
+          <span class="col-xs-6 col-sm-7 col-md-6">43</span>
+        </div>
+        <div class="row">
+          <label class="col-xs-6 col-sm-5 col-md-4 text-right">Gender:</label>
+          <span class="col-xs-6 col-sm-7 col-md-6">FTM</span>
+        </div>
+        <div class="row">
+          <label class="col-xs-6 col-sm-5 col-md-4 text-right">Height:</label>
+          <span class="col-xs-6 col-sm-7 col-md-6">5'8"</span>
+        </div>
+        <div class="row">
+          <label class="col-xs-6 col-sm-5 col-md-4 text-right">Experience:</label>
+          <span class="col-xs-6 col-sm-7 col-md-6">5 years</span>
+        </div>
+        <div class="row">
+          <label class="col-xs-6 col-sm-5 col-md-4 text-right">Restrictions:</label>
+          <span class="col-xs-6 col-sm-7 col-md-6">left knee</span>
+        </div>
+        <div class="row">
+          <label class="col-xs-6 col-sm-5 col-md-4 text-right">Point Average:</label>
+          <span class="col-xs-6 col-sm-7 col-md-6">6.3429</span>
+        </div>
+        <div class="row">
+          <label class="col-xs-6 col-sm-5 col-md-4 text-right">Organization:</label>
+          <span class="col-xs-6 col-sm-7 col-md-6">SFGBA</span>
+        </div>
+        <div class="row">
+          <label class="col-xs-6 col-sm-5 col-md-4 text-right">About:</label>
+          <div class="col-xs-6 col-sm-7 col-md-6">
+            <p>
+              Played basketball at Sanford for 4 season and was the starting center for 3 seasons. Played basketball at Sanford, Played basketball at Sanford, Played basketball at Sanford, Played basketball at Sanford, Played basketball at Sanford, Played basketball at Sanford, Played basketball at Sanford, Played basketball at Sanford, Played basketball at Sanford.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <p>&nbsp;</p>
+  </div>
 </div>
