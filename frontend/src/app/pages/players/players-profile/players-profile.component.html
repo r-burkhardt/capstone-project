@@ -1,13 +1,21 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row" *ngIf="testPlayer; else notReady">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
       <h2 class="player-profile-name">
         <!--Player Name<br />-->
-        {{testPlayer.firstName}} {{testPlayer.lastName}}
+        {{ testPlayer.firstName }} {{testPlayer.lastName}}<br />
         <span class="small">San Jose, CA</span>
       </h2>
     </div>
   </div>
+  <ng-template #notReady>
+    <div class="row">
+      <div class="text-center">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </ng-template>
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
       <!--<div class="text-center">-->
@@ -20,32 +28,32 @@
           <!--<div class="alert alert-success" role="alert">-->
           <div class="alert-success">
             <label class="col-xs-6 col-sm-5 col-md-4 text-right">Player Ranking:</label>
-            <span class="col-xs-6 col-sm-7 col-md-6"><strong>23</strong></span>
+            <span class="col-xs-6 col-sm-7 col-md-6"><strong>{{testPlayer.totalRank}}</strong></span>
           </div>
         </div>
         <div class="row">
           <label class="col-xs-6 col-sm-5 col-md-4 text-right">Age:</label>
-          <span class="col-xs-6 col-sm-7 col-md-6">43</span>
+          <span class="col-xs-6 col-sm-7 col-md-6">{{testPlayer.getAge()}}</span>
         </div>
-        <div class="row">
-          <label class="col-xs-6 col-sm-5 col-md-4 text-right">Gender:</label>
-          <span class="col-xs-6 col-sm-7 col-md-6">FTM</span>
-        </div>
+        <!--<div class="row">-->
+          <!--<label class="col-xs-6 col-sm-5 col-md-4 text-right">Gender:</label>-->
+          <!--<span class="col-xs-6 col-sm-7 col-md-6">{{testPlayer.g}}</span>-->
+        <!--</div>-->
         <div class="row">
           <label class="col-xs-6 col-sm-5 col-md-4 text-right">Height:</label>
-          <span class="col-xs-6 col-sm-7 col-md-6">5'8"</span>
+          <span class="col-xs-6 col-sm-7 col-md-6">{{testPlayer.heightFeet.toString()}}'{{testPlayer.heightInch.toString()}}"</span>
         </div>
         <div class="row">
           <label class="col-xs-6 col-sm-5 col-md-4 text-right">Experience:</label>
-          <span class="col-xs-6 col-sm-7 col-md-6">5 years</span>
+          <span class="col-xs-6 col-sm-7 col-md-6">{{testPlayer.yearsPlay}} years</span>
         </div>
         <div class="row">
           <label class="col-xs-6 col-sm-5 col-md-4 text-right">Restrictions:</label>
-          <span class="col-xs-6 col-sm-7 col-md-6">left knee</span>
+          <span class="col-xs-6 col-sm-7 col-md-6">{{testPlayer.injuries}}</span>
         </div>
         <div class="row">
           <label class="col-xs-6 col-sm-5 col-md-4 text-right">Point Average:</label>
-          <span class="col-xs-6 col-sm-7 col-md-6">6.3429</span>
+          <span class="col-xs-6 col-sm-7 col-md-6">{{testPlayer.pointAvg}}</span>
         </div>
         <div class="row">
           <label class="col-xs-6 col-sm-5 col-md-4 text-right">Organization:</label>

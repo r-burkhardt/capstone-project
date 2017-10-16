@@ -122,4 +122,12 @@ export class Player implements Serializable<Player> {
   clone(): Player {
     return new Player().deserialize(JSON.parse(JSON.stringify(this)));
   }
+
+  getAge(): number {
+    let dob = Date.parse(this.birthday);
+    var timeDiff = Math.abs(Date.now() - dob);
+    return Math.floor((timeDiff / (1000*3600*24))/365);
+    //
+
+  }
 }

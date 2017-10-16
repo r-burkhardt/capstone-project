@@ -20,7 +20,9 @@
     "@angular/platform-browser": "^4.4.5",
     "@angular/platform-browser-dynamic": "^4.4.5",
     "@angular/router": "^4.4.5",
-    "bootstrap": "^3.3.7"
+    "angular-font-awesome": "^2.3.7",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
   },
   "devDependencies": {
     "@angular/cli": "^1.4.7",
