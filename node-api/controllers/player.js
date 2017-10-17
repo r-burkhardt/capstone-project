@@ -205,8 +205,8 @@ exports.createPlayer = function (req, res) {
     // newPlayer.yrsPlayRank = player.yrsPlayRank;
     // newPlayer.skillRank = player.skillRank;
     // newPlayer.injuryRank = player.injuryRank;
-    newPlayer.dateCreated = new Date ().format ( 'c' ); //parseInt(Date.now() / 1000, 10);
-    newPlayer.dateLastModified = new Date ().format ( 'c' ); //parseInt(Date.now() / 1000, 10);
+    newPlayer.dateCreated = new Date ().format ( 'c' );
+    newPlayer.dateLastModified = new Date ().format ( 'c' );
 
     // Add possible check feature here around insert
     var players = collection.insertOne ( newPlayer, function ( err, returnPlayer ) {
