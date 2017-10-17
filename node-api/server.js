@@ -1,9 +1,8 @@
 var express = require('express');
 var assert = require('assert');
 var MongoClient = require('mongodb').MongoClient;
-var ObjectID = require('mongodb').ObjectID;
 var bodyParser = require('body-parser');
-var format = require('date.format.js');
+// var format = require('date.format.js');
 var path = require('path');
 
 var app = express();
@@ -48,8 +47,7 @@ if (env_value === "undefined") {
             break;
             
         case "PROD":
-            // mongodbURL = "mongodb://104.198.193.53:27017/TeamBuilder";
-            //mongodbURL = "mongodb://127.0.0.1:27017/teambuilder";
+            // mongodbURL = "mongodb://127.0.0.1:27017/teambuilder";
             mongodbURL = "mongodb://" + apiAccess + ":" + apiToken + "@127.0.0.1:27017/teambuilder";
             console.log("enviroment = " + mongodbURL);
             break;
