@@ -1,0 +1,19 @@
+{
+  "name": "teambuilder-api",
+  "version": "1.0.0",
+  "description": "This is the api for teambuilder app to access the application data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js 4500 PROD",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roderick Burkhardt & Faiga Revah",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "body-parser": "^1.18.1",
+    "date.format.js": "^1.1.3",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31"
+  }
+}
