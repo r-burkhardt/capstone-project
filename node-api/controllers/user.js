@@ -1,6 +1,5 @@
 var dbConnection;
 var collection;
-var ObjectID = require('mongodb').ObjectID;
 
 exports.setDBConnectionsFromApp = function (app) {
     dbConnection = app.get("dbConnection");
@@ -93,7 +92,8 @@ exports.createUser = function (req, res) {
 exports.updateUser = function (req, res) {
     var user = req.body;
     user.dateLastModified = new Date().format('c');
-    
+
+    // Check for valid objectID
     var objID;
     try {
         objID = ObjectID(req.params.id);

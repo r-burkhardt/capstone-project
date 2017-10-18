@@ -1,6 +1,5 @@
 var dbConnection;
 var collection;
-var ObjectID = require('mongodb').ObjectID;
 
 exports.setDBConnectionsFromApp = function (app) {
     dbConnection = app.get("dbConnection");
@@ -31,6 +30,8 @@ exports.getAllOrg = function (req, res) {
                 newOrganization.phone = organization.phone;
                 newOrganization.contact = organization.contact;
                 newOrganization.about = organization.about;
+                newOrganization.openGym = organization.openGym;
+                newOrganization.league = organization.league;
                 newOrganization.dateCreated = organization.dateCreated;
                 newOrganization.dateLastModified = organization.dateLastModified;
                 
@@ -69,6 +70,8 @@ exports.getOrg = function (req, res) {
             newOrganization.phone = organization.phone;
             newOrganization.contact = organization.contact;
             newOrganization.about = organization.about;
+            newOrganization.openGym = organization.openGym;
+            newOrganization.league = organization.league;
             newOrganization.dateCreated = organization.dateCreated;
             newOrganization.dateLastModified = organization.dateLastModified;
             
@@ -110,6 +113,8 @@ exports.getOrgNearBy = function (req, res) {
                 newOrganization.phone = organization.phone;
                 newOrganization.contact = organization.contact;
                 newOrganization.about = organization.about;
+                newOrganization.openGym = organization.openGym;
+                newOrganization.league = organization.league;
                 newOrganization.dateCreated = organization.dateCreated;
                 newOrganization.dateLastModified = organization.dateLastModified;
                 
@@ -135,6 +140,8 @@ exports.createOrg = function (req, res) {
     newOrganization.phone = organization.phone;
     newOrganization.contact = organization.contact;
     newOrganization.about = organization.about;
+    newOrganization.openGym = organization.openGym;
+    newOrganization.league = organization.league;
     newOrganization.dateCreated = new Date ().format ( 'c' ); //parseInt(Date.now() / 1000, 10);
     newOrganization.dateLastModified = new Date ().format ( 'c' ); //parseInt(Date.now() / 1000, 10);
     
@@ -154,7 +161,7 @@ exports.createOrg = function (req, res) {
 
 exports.updateOrg = function (req, res) {
     var organization = req.body;
-    organization.dateLastModified = new Date().format('c'); //parseInt(Date.now() / 1000, 10);
+    organization.dateLastModified = new Date().format('c');
     
     // Check for valid objectID
     var objID;

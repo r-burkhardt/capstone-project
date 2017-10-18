@@ -1,6 +1,7 @@
 var express = require('express');
 var assert = require('assert');
 var MongoClient = require('mongodb').MongoClient;
+var ObjectID = require('mongodb').ObjectID;
 var bodyParser = require('body-parser');
 var format = require('date.format.js');
 var path = require('path');

@@ -1,6 +1,5 @@
 var dbConnection;
 var collection;
-var ObjectID = require('mongodb').ObjectID;
 
 exports.setDBConnectionsFromApp = function (app) {
     dbConnection = app.get("dbConnection");
@@ -224,7 +223,7 @@ exports.createPlayer = function (req, res) {
 
 exports.updatePlayer = function (req, res) {
     var player = req.body;
-    player.dateLastModified = new Date().format('c'); //parseInt(Date.now() / 1000, 10);
+    player.dateLastModified = new Date().format('c');
 
     // Check for valid objectID
     var objID;
