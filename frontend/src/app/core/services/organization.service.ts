@@ -61,6 +61,18 @@ export class OrganizationService {
 export class Organization implements Serializable<Organization> {
 
   id = "";
+  name = "";
+  street = "";
+  zipcode = "";
+  latitude = "";
+  longitude = "";
+  website = "";
+  email = "";
+  phone = "";
+  contact = "";
+  about = "";
+  dateCreated = "";
+  dateLastModified = "";
 
   serialize(): string {
     return JSON.stringify(this);
@@ -68,7 +80,18 @@ export class Organization implements Serializable<Organization> {
 
   deserialize(json) {
     this.id  = json.id;
-
+    this.name = json.name;
+    this.street = json.street;
+    this.zipcode = json.zipcode;
+    this.latitude = json.latitude;
+    this.longitude = json.longitude;
+    this.website = json.website;
+    this.email = json.email;
+    this.phone = json.phone;
+    this.contact = json.contact;
+    this.about = json.about;
+    this.dateCreated = json.dateCreated;
+    this.dateLastModified = json.dateLastModified;
     return this;
   }
 
