@@ -2,8 +2,8 @@
   <nav class="navbar navbar-default">
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
-        <li role="presentation" routerLinkActive="active">
-          <a routerLink="/">Home</a>
+        <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/" >Home</a>
         </li>
         <li role="presentation" routerLinkActive="active">
           <a routerLink="/organizations">Organizations</a>

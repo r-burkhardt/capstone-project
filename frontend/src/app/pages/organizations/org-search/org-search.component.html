@@ -7,11 +7,9 @@
     </div><!-- /input-group -->
   </form>
   <p></p>
-  <ul class="list-group"> <!-- *ngIf="searchResults">-->
-    <a href="#" class="list-group-item"> <!-- *ngFor="let result of searchResults">-->
-      <a href="#">San Francisco Gay Basketball Association</a><br />
-      San Francisco, CA
+  <ul class="list-group" *ngIf="searchResults">
+    <a class="list-group-item" *ngFor="let result of searchResults" href="/{{result}}">
+      <strong>{{result.name}}</strong><br />
+      {{result.zipcode}}
     </a>
-    <a href="#" class="list-group-item">temp</a>
-    <a href="#" class="list-group-item">temp</a>
   </ul>

@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
     HeaderModule,
     MenuModule
   ],
-  declarations: [],
+  declarations: [  ],
   exports: [
     HeaderModule,
     MenuModule
