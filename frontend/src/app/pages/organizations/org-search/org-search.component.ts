@@ -8,6 +8,7 @@ import {Organization} from '../../../core/services/organization.service';
 })
 export class OrgSearchComponent implements OnInit {
 
+  searchResults: Organization[];
   @Output() selectedOrg = new EventEmitter<Organization>();
 
   constructor() { }

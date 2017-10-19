@@ -1,16 +1,12 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-// import { HeaderComponent } from './shared/layout/header/header.component';
-// import { PlayerService, Player } from './core/services/players.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  // template: "<router-outlet></router-outlet>",
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public title = 'Team Builder';
 
-  public constructor(private viewContainerRef: ViewContainerRef) {}
+  public constructor() {}
 
 }
