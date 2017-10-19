@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Organization} from '../../../core/services/organization.service';
 
 @Component({
   selector: 'app-org-search',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./org-search.component.css']
 })
 export class OrgSearchComponent implements OnInit {
+
+  @Output() selectedOrg = new EventEmitter<Organization>();
 
   constructor() { }
 

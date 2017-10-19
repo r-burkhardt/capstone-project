@@ -1,18 +1,19 @@
 <div class="container-fluid">
   <div class="row">
+
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
       <div class="thumbnail">
         <img class="img-responsive" src="../../../../assets/images/logos/sfgba.jpg">
       </div>
-
     </div>
+
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
       <h4 class="org-name-mini-detail">{{selectedOrg.name}}</h4>
-      {{selectedOrg.street}}<br />
-      San Francisco, CA {{selectedOrg.zipcode}}<br />
-      <a href="{{selectedOrg.website}}">{{selectedOrg.website}}</a><br />
-      <a href="mailto:{{selectedOrg.email}}">{{selectedOrg.email}}</a><br />
-      <!--{{selectedOrg.contact}}<br />-->
+      <i class="fa fa-fw fa-map-marker"></i> {{selectedOrg.street}}<br />
+      <i class="fa fa-fw"></i> San Francisco, CA {{selectedOrg.zipcode}}<br />
+      <i class="fa fa-fw fa-globe"></i> <a href="{{selectedOrg.website}}">{{selectedOrg.website}}</a><br />
+      <i class="fa fa-fw fa-envelope"></i> <a href="mailto:{{selectedOrg.email}}">{{selectedOrg.email}}</a><br />
+      <i class="fa fa-fw fa-arrows-alt glyphicon-barcode"></i> <a href="./{{selectedOrg.id}}">more info</a> <!--{{selectedOrg.contact}}<br />-->
     </div>
 
   </div>

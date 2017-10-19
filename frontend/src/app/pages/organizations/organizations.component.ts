@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {Organization} from '../../core/services/organization.service';
 
 @Component({
@@ -10,7 +10,7 @@ export class OrganizationsComponent implements OnInit {
 
 
 
-  testOrg: Organization;
+  @Output() testOrg: Organization;
 
   constructor() {
     this.testOrg = new Organization();

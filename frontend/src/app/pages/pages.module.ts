@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PagesComponent } from './pages.component';
+// import { PagesComponent } from './pages.component';
 import { HomeModule } from './home/home.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { PlayersModule } from './players/players.module';
@@ -13,8 +13,8 @@ import { PlayersModule } from './players/players.module';
     OrganizationsModule,
     PlayersModule
   ],
-  declarations: [ PagesComponent ],
-  exports: [ PagesComponent ]
+  // declarations: [ PagesComponent ],
+  // exports: [ PagesComponent ]
 })
 
 export class PagesModule { }

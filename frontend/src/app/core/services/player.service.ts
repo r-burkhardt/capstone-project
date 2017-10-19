@@ -32,13 +32,14 @@ export class PlayerService {
     });
   }
 
+  // getAllPlayers(params): Observable<Player[]> {
   getAllPlayers(params): Observable<Player[]> {
     let observable;
     if (this.apiService.isLocal()) {
-      const uri = this.baseUri + (params === undefined ? "" : "?" + this.apiService.resolveParamsToUri(params));
+      const uri = this.baseUri; // + (params === undefined ? "" : "?" + this.apiService.resolveParamsToUri(params));
       observable = this.apiService.get(uri);
     } else {
-      observable = this.apiService.remoteCall("getPlayers", JSON.stringify(params));
+      observable = this.apiService.remoteCall('getPlayers', JSON.stringify(params));
     }
 
     return observable.map(response => {
@@ -77,6 +78,7 @@ export class Player implements Serializable<Player> {
   yearsPlay = "";
   injuries = "";
   pointAvg = "";
+  about = "";
 
   totalRank = "";
   // ageRank = "";
@@ -108,6 +110,7 @@ export class Player implements Serializable<Player> {
     this.yearsPlay = json.yearsPlay;
     this.injuries = json.injuries;
     this.pointAvg = json.pointAvg;
+    this.about = json.about;
 
     this.totalRank = json.totalRank;
     // this.ageRank = json.ageRank;
