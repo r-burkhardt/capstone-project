@@ -71,6 +71,7 @@ export class Organization implements Serializable<Organization> {
   phone = "";
   contact = "";
   about = "";
+  logo = "";
   dateCreated = "";
   dateLastModified = "";
 
@@ -90,6 +91,7 @@ export class Organization implements Serializable<Organization> {
     this.phone = json.phone;
     this.contact = json.contact;
     this.about = json.about;
+    this.logo = json.logo;
     this.dateCreated = json.dateCreated;
     this.dateLastModified = json.dateLastModified;
     return this;

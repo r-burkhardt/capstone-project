@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Organization} from '../../core/services/organization.service';
 
 @Component({
@@ -8,6 +8,9 @@ import {Organization} from '../../core/services/organization.service';
 })
 export class OrganizationsComponent implements OnInit {
 
+  selectedOrg: Organization;
+  // @Input() selectedOrg: Organization;
+  @Output() passOrg = new EventEmitter<Organization>();
 
 
   @Output() testOrg: Organization;
@@ -29,6 +32,14 @@ export class OrganizationsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  selectedOrgUpdate(organization: Organization) {
+    this.selectedOrg = organization;
+  }
+
+  passOnOrg() {
+    this.passOrg.emit(this.selectedOrg);
   }
 
 }

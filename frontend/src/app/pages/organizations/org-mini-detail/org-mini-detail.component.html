@@ -2,9 +2,16 @@
   <div class="row">
 
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-      <div class="thumbnail">
-        <img class="img-responsive" src="../../../../assets/images/logos/sfgba.jpg">
+      <div class="thumbnail" *ngIf="selectedOrg.logo; else defaultPicture">
+        <img class="img-responsive" src="../../../../assets/images/logos/{{selectedOrg.logo}}">
       </div>
+
+      <ng-template #defaultPicture>
+        <div class="thumbnail">
+          <img class="img-responsive" src="../../../../assets/images/logos/default-profile-picture.png">
+        </div>
+      </ng-template>
+
     </div>
 
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
@@ -13,7 +20,7 @@
       <i class="fa fa-fw"></i> San Francisco, CA {{selectedOrg.zipcode}}<br />
       <i class="fa fa-fw fa-globe"></i> <a href="{{selectedOrg.website}}">{{selectedOrg.website}}</a><br />
       <i class="fa fa-fw fa-envelope"></i> <a href="mailto:{{selectedOrg.email}}">{{selectedOrg.email}}</a><br />
-      <i class="fa fa-fw fa-arrows-alt glyphicon-barcode"></i> <a href="./{{selectedOrg.id}}">more info</a> <!--{{selectedOrg.contact}}<br />-->
+      <i class="fa fa-fw fa-arrows-alt glyphicon-barcode"></i> <a routerLink="./{{selectedOrg.id}}">more info</a>
     </div>
   </div>
 </div>

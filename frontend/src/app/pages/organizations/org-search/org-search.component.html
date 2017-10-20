@@ -8,7 +8,9 @@
   </form>
   <p></p>
   <ul class="list-group" *ngIf="searchResults">
-    <a class="list-group-item" *ngFor="let result of searchResults" href="/{{result}}">
+    <a *ngFor="let result of searchResults"
+       (click)="onSelect(result)"
+       class="list-group-item">
       <strong>{{result.name}}</strong><br />
       {{result.zipcode}}
     </a>
