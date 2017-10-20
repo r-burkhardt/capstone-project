@@ -41,6 +41,7 @@ exports.getAllPlayer = function (req, res) {
                 }
                 newPlayer.injuries = injuryList;
                 newPlayer.pointAvg = player.pointAvg;
+                newPlayer.profilePic = player.profilePic;
                 // Player ranking
                 newPlayer.totalRank = player.totalRank;
                 // newPlayer.ageRank = player.ageRank;
@@ -100,6 +101,7 @@ exports.getPlayer = function (req, res) {
             }
             newPlayer.injuries = injuryList;
             newPlayer.pointAvg = player.pointAvg;
+            newPlayer.profilePic = player.profilePic;
             // Player ranking
             newPlayer.totalRank = player.totalRank;
             // newPlayer.ageRank = player.ageRank;
@@ -160,6 +162,7 @@ exports.getPlayerNearBy = function (req, res) {
                 }
                 newPlayer.injuries = injuryList;
                 newPlayer.pointAvg = player.pointAvg;
+                newPlayer.profilePic = player.profilePic;
                 // Player ranking
                 newPlayer.totalRank = player.totalRank;
                 // newPlayer.ageRank = player.ageRank;
@@ -197,6 +200,7 @@ exports.createPlayer = function (req, res) {
     newPlayer.yearsPlay = player.yearsPlay;
     newPlayer.injuries = player.injuries;
     newPlayer.pointAvg = player.pointAvg;
+    newPlayer.profilePic = player.profilePic;
     // Player ranking
     newPlayer.totalRank = player.totalRank;
     // newPlayer.ageRank = player.ageRank;

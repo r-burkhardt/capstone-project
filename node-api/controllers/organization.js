@@ -32,6 +32,7 @@ exports.getAllOrg = function (req, res) {
                 newOrganization.about = organization.about;
                 newOrganization.openGym = organization.openGym;
                 newOrganization.league = organization.league;
+                newOrganization.logo = organization.logo;
                 newOrganization.dateCreated = organization.dateCreated;
                 newOrganization.dateLastModified = organization.dateLastModified;
                 
@@ -72,6 +73,7 @@ exports.getOrg = function (req, res) {
             newOrganization.about = organization.about;
             newOrganization.openGym = organization.openGym;
             newOrganization.league = organization.league;
+            newOrganization.logo = organization.logo;
             newOrganization.dateCreated = organization.dateCreated;
             newOrganization.dateLastModified = organization.dateLastModified;
             
@@ -115,6 +117,7 @@ exports.getOrgNearBy = function (req, res) {
                 newOrganization.about = organization.about;
                 newOrganization.openGym = organization.openGym;
                 newOrganization.league = organization.league;
+                newOrganization.logo = organization.logo;
                 newOrganization.dateCreated = organization.dateCreated;
                 newOrganization.dateLastModified = organization.dateLastModified;
                 
@@ -142,6 +145,7 @@ exports.createOrg = function (req, res) {
     newOrganization.about = organization.about;
     newOrganization.openGym = organization.openGym;
     newOrganization.league = organization.league;
+    newOrganization.logo = organization.logo;
     newOrganization.dateCreated = new Date ().format ( 'c' ); //parseInt(Date.now() / 1000, 10);
     newOrganization.dateLastModified = new Date ().format ( 'c' ); //parseInt(Date.now() / 1000, 10);
     
