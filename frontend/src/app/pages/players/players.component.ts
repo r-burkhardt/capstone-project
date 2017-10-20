@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Player, PlayerService} from '../../core/services/player.service';
 
 import { Subject } from 'rxjs/Subject';
+import {Zipcode, ZipcodeService} from '../../core/services/zipcode.service';
 
 @Component({
   selector: 'app-players',
@@ -14,7 +15,10 @@ export class PlayersComponent implements OnInit {
   allPlayers: Player[];
   onePlayer: Player;
 
-  constructor( private playerService: PlayerService ) { }
+  constructor(
+    private playerService: PlayerService,
+    private zipcodeService: ZipcodeService
+  ) { }
 
   ngOnInit() {
 
@@ -23,7 +27,7 @@ export class PlayersComponent implements OnInit {
       .takeUntil(this.unsubscribe)
       .subscribe(players => {
         this.allPlayers = players;
-        // console.log(players);
+        console.log(this.allPlayers);
       });
     const playerId = '59c0355f4b10a131a71c3e4b';
     this.playerService.getPlayer(playerId)
@@ -32,6 +36,16 @@ export class PlayersComponent implements OnInit {
         this.onePlayer = player;
       });
 
+  }
+
+  getCityState(zipcode: any): string {
+    let zip: Zipcode;
+    this.zipcodeService.getZipcode(zipcode)
+      .takeUntil(this.unsubscribe)
+      .subscribe(rtrnZipcode => {
+        zip = rtrnZipcode;
+      });
+    return zip.city + ', ' + zip.state;
   }
 
 }

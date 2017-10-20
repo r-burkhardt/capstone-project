@@ -87,6 +87,7 @@ export class Player implements Serializable<Player> {
   injuries = '';
   pointAvg = '';
   about = '';
+  profilePic = '';
 
   totalRank = '';
   // ageRank = "";
@@ -119,6 +120,7 @@ export class Player implements Serializable<Player> {
     this.injuries = json.injuries;
     this.pointAvg = json.pointAvg;
     this.about = json.about;
+    this.profilePic = json.profilePic;
 
     this.totalRank = json.totalRank;
     // this.ageRank = json.ageRank;
