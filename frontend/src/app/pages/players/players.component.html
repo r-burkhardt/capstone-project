@@ -8,8 +8,18 @@
   </div>
   <div class="row">
     <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
-      Here
+      <ul *ngIf="allPlayers">
+        <li *ngFor="let player of allPlayers">
+          {{player.firstName}} {{player.id}}
+        </li>
+      </ul>
     </div>
   </div>
-  <!--<app-players-profile></app-players-profile>-->
+  <div class="row">
+    <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
+      <div *ngIf="onePlayer">
+        {{onePlayer.firstName }} {{onePlayer.id}}
+      </div>
+    </div>
+  </div>
 </div>

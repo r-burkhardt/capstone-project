@@ -1,38 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { Player } from '../../../core/services/player.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Player, PlayerService } from '../../../core/services/player.service';
+import { Zipcode, ZipcodeService } from '../../../core/services/zipcode.service';
+
+import { Subject } from 'rxjs/Subject';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-players-profile',
   templateUrl: './players-profile.component.html',
   styleUrls: ['./players-profile.component.css']
 })
-export class PlayersProfileComponent implements OnInit {
+export class PlayersProfileComponent implements OnInit, OnDestroy {
+  unsubscribe: Subject<void> = new Subject<void>();
 
-  testPlayer: Player;
+  // testPlayer: Player;
+  player: Player;
+  zipcode: Zipcode;
 
-  constructor() {
-    this.testPlayer = new Player();
-    this.testPlayer.id = '1234567';
-    this.testPlayer.firstName = 'John';
-    this.testPlayer.lastName = 'Smith';
-    this.testPlayer.totalRank = '19';
-    this.testPlayer.birthday = '1974-08-02';
-    this.testPlayer.injuries = 'left knee';
-    this.testPlayer.pointAvg = '6.3429';
-    this.testPlayer.yearsPlay = '8';
-    this.testPlayer.heightFeet = '5';
-    this.testPlayer.heightInch = '8';
-    this.testPlayer.zipcode = '95008';
-    this.testPlayer.about = 'Played basketball at Sanford for 4 season and was the starting center for 3 seasons.'
-    console.log(this.testPlayer);
-  }
+  constructor(
+    private playerService: PlayerService,
+    private zipcodeService: ZipcodeService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.getPlayer(params['id']);
+    });
+    // this.getPlayer('59bea0e3df42e0e6c51d8b8d');
   }
 
-  // getAge(birthday: string): string {
-  //
-  //   return "43";
-  // }
+  ngOnDestroy() {
+    // Prevent memory leak
+    // See https://stackoverflow.com/questions/38008334/angular-rxjs-when-should-i-unsubscribe-from-subscription
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  getPlayer(id: string) {
+    this.playerService.getPlayer(id)
+      .takeUntil(this.unsubscribe)
+      .subscribe(player => {
+        this.player = player;
+        this.zipcodeService.getZipcode(this.player.zipcode)
+          .takeUntil(this.unsubscribe)
+          .subscribe(zipcode => {
+            this.zipcode = zipcode;
+          });
+      });
+  }
 
 }

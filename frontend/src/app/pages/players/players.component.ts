@@ -9,22 +9,29 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  // unsubscribe: Subject<void> = new Subject<void>();
+  unsubscribe: Subject<void> = new Subject<void>();
 
-  // allPlayers: Player[];
+  allPlayers: Player[];
+  onePlayer: Player;
 
-  // constructor( private playerService: PlayerService ) { }
-  constructor(  ) { }
+  constructor( private playerService: PlayerService ) { }
 
   ngOnInit() {
 
     const playerParameters = {};
-    // this.playerService.getAllPlayers(playerParameters)
-    //   .takeUntil(this.unsubscribe)
-    //   .subscribe(players => {
-    //     this.allPlayers = players;
-    //     console.log(players);
-    //   });
+    this.playerService.getAllPlayers(playerParameters)
+      .takeUntil(this.unsubscribe)
+      .subscribe(players => {
+        this.allPlayers = players;
+        // console.log(players);
+      });
+    const playerId = '59c0355f4b10a131a71c3e4b';
+    this.playerService.getPlayer(playerId)
+      .takeUntil(this.unsubscribe)
+      .subscribe(player => {
+        this.onePlayer = player;
+      });
+
   }
 
 }

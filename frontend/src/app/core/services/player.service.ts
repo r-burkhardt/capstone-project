@@ -1,45 +1,43 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from "./api.service";
-import { Observable } from "rxjs/Observable";
+import { ApiService } from './api.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PlayerService {
 
-  private readonly baseUri = "v1/players";
+  private readonly baseUri = 'v1/player';
 
   constructor(private apiService: ApiService) {  }
 
   getPlayer(id: string): Observable<Player> {
-    const uri = this.baseUri + "/" + id;
+    const uri = this.baseUri + '/' + id;
 
     let observable;
     if (this.apiService.isLocal()) {
       observable = this.apiService.get(uri);
-    } else {
-      const json = { ids: id };
-      observable = this.apiService.remoteCall("getPlayer", JSON.stringify(json));
     }
 
     return observable.map(response => {
       let data;
-      if (response.result) {
-        data = response.result[0];
-      } else {
-        data = response[0];
-      }
+      // if (response.result) {
+      //   console.log(response);
+      //   data = response.result[0];
+      // } else {
+      //   console.log(response)
+      //   data = response[0];
+      // }
+
+      data = response;
 
       return new Player().deserialize(data);
     });
   }
 
-  // getAllPlayers(params): Observable<Player[]> {
   getAllPlayers(params): Observable<Player[]> {
     let observable;
     if (this.apiService.isLocal()) {
-      const uri = this.baseUri; // + (params === undefined ? "" : "?" + this.apiService.resolveParamsToUri(params));
+      const uri = this.baseUri;
       observable = this.apiService.get(uri);
-    } else {
-      observable = this.apiService.remoteCall('getPlayers', JSON.stringify(params));
     }
 
     return observable.map(response => {
@@ -50,37 +48,47 @@ export class PlayerService {
 
       const players = [];
       if (!data.status) {
-        data.forEach(item => {
+        data.players.forEach(item => {
           players.push(new Player().deserialize(item));
-        });
+        })
       }
       return players;
     });
   }
+
+  createPlayer(player: Player): Observable<Player> {
+    return null;
+  }
+
+  updatePlayer(player: Player): Observable<Player> {
+    return null;
+  }
+
+  // deletePlayer(player: Player) { }
 }
 
 export class Player implements Serializable<Player> {
 
-  id = "";
-  userId = "";
-  status = "";
-  firstName = "";
-  lastName = "";
-  email = "";
-  phone = "";
-  zipcode = "";
-  latitude = "";
-  longitude = "";
+  id = '';
+  userId = '';
+  status = '';
+  firstName = '';
+  lastName = '';
+  email = '';
+  phone = '';
+  zipcode = '';
+  latitude = '';
+  longitude = '';
   // organizationId = "";
-  birthday = "";
-  heightFeet = "";
-  heightInch = "";
-  yearsPlay = "";
-  injuries = "";
-  pointAvg = "";
-  about = "";
+  birthday = '';
+  heightFeet = '';
+  heightInch = '';
+  yearsPlay = '';
+  injuries = '';
+  pointAvg = '';
+  about = '';
 
-  totalRank = "";
+  totalRank = '';
   // ageRank = "";
   // heightRank = "";
   // yrsPlayRank = "";
@@ -127,9 +135,9 @@ export class Player implements Serializable<Player> {
   }
 
   getAge(): number {
-    let dob = Date.parse(this.birthday);
-    var timeDiff = Math.abs(Date.now() - dob);
-    return Math.floor((timeDiff / (1000*3600*24))/365);
+    const dob = Date.parse(this.birthday);
+    const timeDiff = Math.abs(Date.now() - dob);
+    return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
     //
 
   }

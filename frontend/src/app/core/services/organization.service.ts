@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class OrganizationService {
 
-  private readonly baseUri = "v1/organizations";
+  private readonly baseUri = "v1/org";
 
   constructor(private apiService: ApiService) { }
 
@@ -15,18 +15,21 @@ export class OrganizationService {
     let observable;
     if (this.apiService.isLocal()) {
       observable = this.apiService.get(uri);
-    } else {
-      const json = { ids: id };
-      observable = this.apiService.remoteCall("getOrganizations", JSON.stringify(json));
     }
+    // else {
+    //   const json = { ids: id };
+    //   observable = this.apiService.remoteCall("getOrganizations", JSON.stringify(json));
+    // }
 
     return observable.map(response => {
       let data;
-      if (response.result) {
-        data = response.result[0];
-      } else {
-        data = response[0];
-      }
+      // if (response.result) {
+      //   data = response.result[0];
+      // } else {
+      //   data = response[0];
+      // }
+
+      data = response;
 
       return new Organization().deserialize(data);
     });
@@ -35,11 +38,11 @@ export class OrganizationService {
   getAllOrganizations(params): Observable<Organization[]> {
     let observable;
     if (this.apiService.isLocal()) {
-      const uri = this.baseUri + (params === undefined ? "" : "?" + this.apiService.resolveParamsToUri(params));
+      const uri = this.baseUri; // + (params === undefined ? "" : "?" + this.apiService.resolveParamsToUri(params));
       observable = this.apiService.get(uri);
-    } else {
-      observable = this.apiService.remoteCall("getOrganizations", JSON.stringify(params));
-    }
+    } //else {
+      // observable = this.apiService.remoteCall("getOrganizations", JSON.stringify(params));
+    // }
 
     return observable.map(response => {
       let data = response;
@@ -49,7 +52,7 @@ export class OrganizationService {
 
       const organizations = [];
       if (!data.status) {
-        data.forEach(item => {
+        data.organizations.forEach(item => {
           organizations.push(new Organization().deserialize(item));
         });
       }
