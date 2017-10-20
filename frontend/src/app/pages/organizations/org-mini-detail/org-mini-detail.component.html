@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="selectedOrg; else nothingSelected">
   <div class="row">
 
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
@@ -15,6 +15,15 @@
       <i class="fa fa-fw fa-envelope"></i> <a href="mailto:{{selectedOrg.email}}">{{selectedOrg.email}}</a><br />
       <i class="fa fa-fw fa-arrows-alt glyphicon-barcode"></i> <a href="./{{selectedOrg.id}}">more info</a> <!--{{selectedOrg.contact}}<br />-->
     </div>
-
   </div>
 </div>
+
+<ng-template #nothingSelected>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        To find an organization to play with, search with your zip on the left.
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ModuleWithProviders } from '@angular/core/src/core';
 
-// import { PagesModule } from './pages/pages.module';
 import { HomeComponent } from './pages/home/home.component';
 import { OrganizationsComponent } from './pages/organizations/organizations.component';
 import { PlayersComponent } from './pages/players/players.component';
 import { OrgProfileComponent } from './pages/organizations/org-profile/org-profile.component';
 import { PlayersProfileComponent } from './pages/players/players-profile/players-profile.component';
+import {ErrorPageComponent} from './shared/errors/error-page/error-page.component';
+import {LoginComponent} from './user/login/login.component';
+import {SignupComponent} from './user/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
-  // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '', component: HomeComponent },
   { path: 'organizations', component: OrganizationsComponent },
   // { path: 'organizations', component: OrganizationsComponent, children: [
@@ -18,7 +18,11 @@ const appRoutes: Routes = [
   // ] },
   { path: 'organizations/:id', component: OrgProfileComponent },
   { path: 'players', component: PlayersComponent },
-  { path: 'players/:id', component: PlayersProfileComponent }
+  { path: 'players/:id', component: PlayersProfileComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'sign-up', component: SignupComponent },
+  { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
+  { path: '**', redirectTo: '/not-found' }
 ];
 
 @NgModule({
@@ -28,4 +32,3 @@ const appRoutes: Routes = [
 
 export class AppRoutingModule {}
 
-// export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});

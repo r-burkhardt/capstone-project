@@ -8,7 +8,7 @@ $topnav-background-color: white;
   left: 0;
   right: 0;
   bottom: 0;
-  overflow: auto;
+  //overflow: auto;
   background: $topnav-background-color;
   text-align: center;
   color: rgb(0,37,53);
@@ -53,9 +53,9 @@ $topnav-background-color: white;
 
   h1 {
     font-weight: 300;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 36px;
+    margin-top: 10px;
+    margin-bottom:5px;
+    //font-size: 36px;
     small {
       color: rgba(0,37,53,.7);
     }
@@ -80,7 +80,7 @@ $topnav-background-color: white;
     }
   }
   .form-content {
-    padding: 40px 0;
+    padding: 20px 0;
   }
   .user-avatar {
     -webkit-border-radius: 50%;

@@ -17,4 +17,5 @@ import { RouterModule } from '@angular/router';
     MenuModule
   ]
 })
+
 export class LayoutModule { }

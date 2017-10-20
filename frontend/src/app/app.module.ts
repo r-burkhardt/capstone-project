@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app.routing';
 import { CoreModule } from './core/core.module';
 import { TBadminModule } from './shared/tbadmin.module';
 import { PagesModule } from './pages/pages.module';
+import {UserModule} from './user/user.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -28,7 +29,8 @@ const APP_PROVIDERS = [
     AppRoutingModule,
     CoreModule,
     TBadminModule,
-    PagesModule
+    PagesModule,
+    UserModule
   ],
   providers: [
     APP_PROVIDERS,

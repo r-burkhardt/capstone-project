@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Organization } from "../../../core/services/organization.service";
+import { Organization } from '../../../core/services/organization.service';
 
 @Component({
   selector: 'app-org-mini-detail',
