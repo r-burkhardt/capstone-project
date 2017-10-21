@@ -1,3 +1,4 @@
+var ObjectID = require('mongodb').ObjectID;
 var dbConnection;
 var collection;
 
@@ -89,10 +90,12 @@ exports.getOrg = function (req, res) {
 exports.getOrgNearBy = function (req, res) {
     var latitude = req.params.lat;
     var longitude = req.params.long;
-    var distance = ((req.params.distance * 1.60934 ) / 6371 ); // distance in miles divided by 3959, in km / 6371
-    console.log(distance);
-    
-    var organizations = collection.find({"latLong":{$near:[parseFloat(latitude), parseFloat(longitude)], $maxDistance: parseFloat(distance)}}, function (err, docsCursor) {
+    var distance = req.params.distance; //((req.params.distance * 1.60934 ) / 6371 ); // distance in miles divided by 3959, in km / 6371
+    // console.log(distance);
+
+    // var organizations = collection.find({"latLong":{$near:[parseFloat(latitude), parseFloat(longitude)], $maxDistance: parseFloat(distance)}}, function (err, docsCursor) {
+    // var organizations = collection.find({"latLong":{$near:[parseFloat(latitude), parseFloat(longitude)]}}, function (err, docsCursor) {
+    var organizations = collection.find( { loc: { $geoWithin: { $centerSphere: [ [ parseFloat(latitude), parseFloat(longitude)] , distance / 3963.2 ] } } }, function ( err, docsCursor ) {
         res.type('application/json');
         if (err) {
             res.status(500);
@@ -169,6 +172,9 @@ exports.updateOrg = function (req, res) {
     
     // Check for valid objectID
     var objID;
+    // console.log(req.params.id);
+
+    console.log(ObjectID(req.params.id));
     try {
         objID = ObjectID(req.params.id);
     } catch(e) {

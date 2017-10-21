@@ -74,8 +74,10 @@ MongoClient.connect(mongodbURL, function ( err, dbConnection ) {
     app.set("dbConnection", dbConnection);
     
     // create location index in players for latLong to 2d location
-    var playersCollection = dbConnection.collection("players");
-    playersCollection.createIndex({"latLong":"2d"});
+    var playerCollection = dbConnection.collection("player");
+    playerCollection.createIndex({"latLong":"2d"});
+    var organizationCollection = dbConnection.collection("organization");
+    organizationCollection.createIndex({"latLong":"2d"});
     
     // Modules that interact with the controllers
     // require('./routes/authenticate')(app);

@@ -1,3 +1,4 @@
+var ObjectID = require('mongodb').ObjectID;
 var dbConnection;
 var collection;
 
