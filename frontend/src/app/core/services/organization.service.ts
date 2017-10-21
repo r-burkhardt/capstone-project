@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from "./api.service";
-import { Observable } from "rxjs/Observable";
+import { ApiService } from './api.service';
+import { Observable } from 'rxjs/Observable';
+import {Zipcode} from './zipcode.service';
 
 @Injectable()
 export class OrganizationService {
 
-  private readonly baseUri = "v1/org";
+  private readonly baseUri = 'v1/org';
 
   constructor(private apiService: ApiService) { }
 
   getOrganization(id: string): Observable<Organization> {
-    const uri = this.baseUri + "/" + id;
+    const uri = this.baseUri + '/' + id;
 
     let observable;
     if (this.apiService.isLocal()) {
@@ -63,22 +64,24 @@ export class OrganizationService {
 
 export class Organization implements Serializable<Organization> {
 
-  id = "";
-  name = "";
-  street = "";
-  zipcode = "";
-  latitude = "";
-  longitude = "";
-  website = "";
-  email = "";
-  phone = "";
-  contact = "";
-  about = "";
-  logo = "";
-  dateCreated = "";
-  dateLastModified = "";
+  id = '';
+  name = '';
+  street = '';
+  zipcode = '';
+  zipcodeObj = new Zipcode();
+  latitude = '';
+  longitude = '';
+  website = '';
+  email = '';
+  phone = '';
+  contact = '';
+  about = '';
+  logo = '';
+  dateCreated = '';
+  dateLastModified = '';
 
   serialize(): string {
+    this.zipcode = this.zipcodeObj.zip;
     return JSON.stringify(this);
   }
 
@@ -87,6 +90,7 @@ export class Organization implements Serializable<Organization> {
     this.name = json.name;
     this.street = json.street;
     this.zipcode = json.zipcode;
+    this.zipcodeObj = new Zipcode();
     this.latitude = json.latitude;
     this.longitude = json.longitude;
     this.website = json.website;

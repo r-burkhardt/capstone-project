@@ -8,6 +8,15 @@
   </div>
   <div class="row">
     <div class="col-sx-12 col-sm-7 col-md-8 col-lg-9">
+      <h4>A player can...</h4>
+      <ul>
+        <li>Join an Organization</li>
+        <li>Join an Organization's Leagues</li>
+        <li>Check in to an Open Gym session</li>
+        <li>Keep track of their game stats</li>
+        <li>Host/participate pick-up games</li>
+        <li>Keep in touch with other players</li>
+      </ul>
       <!--<ul *ngIf="allPlayers">-->
         <!--<li *ngFor="let player of allPlayers">-->
           <!--{{player.firstName}} {{player.id}}-->
@@ -15,7 +24,23 @@
       <!--</ul>-->
     </div>
     <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-      <h3 class="">New Players</h3>
+      <!--<div class="panel panel-info">-->
+        <!--<div class="panel-heading text-center">New Players</div>-->
+        <!--<div class="panel-body">-->
+          <!--<div class="list-group" *ngIf="allPlayers">-->
+            <!--<a *ngFor="let player of allPlayers"-->
+               <!--routerLink="./{{player.id}}"-->
+               <!--class="list-group-item">-->
+              <!--<h4 class="list-group-item-heading">{{player.firstName}}</h4>-->
+              <!--{{player.zipcodeObj.city}}, {{player.zipcodeObj.state}}-->
+            <!--</a>-->
+
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="alert alert-info text-center" id="new-player-header" >
+        <h3 class="">New Players</h3>
+      </div>
       <div class="list-group" *ngIf="allPlayers">
         <a *ngFor="let player of allPlayers"
            routerLink="./{{player.id}}"

@@ -2,8 +2,8 @@
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
-          <button class="btn btn-info" type="button">Go!</button>
-        </span>
+        <button class="btn btn-info" type="button" (click)="createSearchResults()">Go!</button>
+      </span>
     </div><!-- /input-group -->
   </form>
   <p></p>
@@ -12,6 +12,6 @@
        (click)="onSelect(result)"
        class="list-group-item">
       <strong>{{result.name}}</strong><br />
-      {{result.zipcode}}
+      {{result.zipcodeObj.city}}, {{result.zipcodeObj.state}}
     </a>
   </ul>

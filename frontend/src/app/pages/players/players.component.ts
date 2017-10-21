@@ -37,12 +37,12 @@ export class PlayersComponent implements OnInit {
             });
         });
       });
-    const playerId = '59c0355f4b10a131a71c3e4b';
-    this.playerService.getPlayer(playerId)
-      .takeUntil(this.unsubscribe)
-      .subscribe(player => {
-        this.onePlayer = player;
-      });
+    // const playerId = '59c0355f4b10a131a71c3e4b';
+    // this.playerService.getPlayer(playerId)
+    //   .takeUntil(this.unsubscribe)
+    //   .subscribe(player => {
+    //     this.onePlayer = player;
+    //   });
 
   }
 

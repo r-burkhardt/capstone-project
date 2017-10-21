@@ -1,10 +1,9 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="org">
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
       <h2 class="player-profile-name">
-        <!--Player Name<br />-->
-        {{ testOrg.name }}<br />
-        <span class="small">San Jose, CA</span>
+        {{ org.name }}<br />
+        <span class="small">{{org.zipcodeObj.city}}, {{org.zipcodeObj.state}}</span>
       </h2>
     </div>
   </div>
@@ -13,30 +12,27 @@
     <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
       <!--<div class="col-xs-12 col-sm-12 col-md-10">-->
         <div class="row">
-          <!--<div class="alert alert-success" role="alert">-->
-          <!--<div class="alert-success">-->
             <label class="col-xs-3 col-sm-3 col-md-3 text-right">Primary Location:</label>
             <span class="col-xs-9 col-sm-9 col-md-9">
-              {{testOrg.street}}<br />
-              {{testOrg.zipcode}}
+              {{org.street}}<br />
+              {{org.zipcodeObj.city}}, {{org.zipcodeObj.state}} {{org.zipcode}}
             </span>
-          <!--</div>-->
         </div>
         <div class="row">
           <label class="col-xs-3 col-sm-3 col-md-3 text-right">Website:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{testOrg.website}}</span>
+          <span class="col-xs-9 col-sm-9 col-md-9">{{org.website}}</span>
         </div>
         <div class="row">
           <label class="col-xs-3 col-sm-3 col-md-3 text-right">Email:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{testOrg.email}}"</span>
+          <span class="col-xs-9 col-sm-9 col-md-9">{{org.email}}"</span>
         </div>
         <div class="row">
           <label class="col-xs-3 col-sm-3 col-md-3 text-right">Phone:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{testOrg.phone}}</span>
+          <span class="col-xs-9 col-sm-9 col-md-9">{{org.phone}}</span>
         </div>
         <div class="row">
           <label class="col-xs-3 col-sm-3 col-md-3 text-right">Contact:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{testOrg.contact}}</span>
+          <span class="col-xs-9 col-sm-9 col-md-9">{{org.contact}}</span>
         </div>
         <div class="row">
           <label class="col-xs-3 col-sm-3 col-md-3 text-right">Open Gym:</label>
@@ -48,14 +44,19 @@
         </div>
         <div class="row">
           <label class="col-xs-3 col-sm-3 col-md-3 text-right">About:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{testOrg.about}}</span>
+          <span class="col-xs-9 col-sm-9 col-md-9">{{org.about}}</span>
         </div>
       <!--</div>-->
     </div>
     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-      <div class="thumbnail">
-        <img class="" src="../../../../assets/images/logos/sfgba.jpg">
+      <div class="thumbnail" *ngIf="org.logo; else defaultLogo">
+        <img class="" src="../../../../assets/images/logos/{{org.logo}}">
       </div>
+      <ng-template #defaultLogo>
+        <div class="thumbnail">
+          <img class="" src="../../../../assets/images/logos/default-profile-picture.png">
+        </div>
+      </ng-template>
     </div>
   </div>
   <div class="row">
