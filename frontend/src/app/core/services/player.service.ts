@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs/Observable';
+import {Zipcode} from './zipcode.service';
 
 @Injectable()
 export class PlayerService {
@@ -12,13 +13,13 @@ export class PlayerService {
   getPlayer(id: string): Observable<Player> {
     const uri = this.baseUri + '/' + id;
 
-    let observable;
-    if (this.apiService.isLocal()) {
-      observable = this.apiService.get(uri);
-    }
+    const observable  = this.apiService.get(uri);
+    // if (this.apiService.isLocal()) {
+    //   observable = this.apiService.get(uri);
+    // }
 
     return observable.map(response => {
-      let data;
+      const data = response;
       // if (response.result) {
       //   console.log(response);
       //   data = response.result[0];
@@ -27,7 +28,7 @@ export class PlayerService {
       //   data = response[0];
       // }
 
-      data = response;
+      // data = response;
 
       return new Player().deserialize(data);
     });
@@ -77,9 +78,9 @@ export class Player implements Serializable<Player> {
   email = '';
   phone = '';
   zipcode = '';
+  zipcodeObj = new Zipcode();
   latitude = '';
   longitude = '';
-  // organizationId = "";
   birthday = '';
   heightFeet = '';
   heightInch = '';
@@ -90,14 +91,12 @@ export class Player implements Serializable<Player> {
   profilePic = '';
 
   totalRank = '';
-  // ageRank = "";
-  // heightRank = "";
-  // yrsPlayRank = "";
-  // skillRank = "";
-  // injuryRank = "";
+  dateCreated = '';
+  dateLastModified = '';
 
 
   serialize(): string {
+    this.zipcode = this.zipcodeObj.zip;
     return JSON.stringify(this);
   }
 
@@ -110,9 +109,9 @@ export class Player implements Serializable<Player> {
     this.email = json.email;
     this.phone = json.phone;
     this.zipcode = json.zipcode;
+    this.zipcodeObj = new Zipcode();
     this.latitude = json.latitude;
     this.longitude = json.longitude;
-    // this.organizationId = json.organizationId;
     this.birthday = json.birthday;
     this.heightFeet = json.heightFeet;
     this.heightInch = json.heightInch;
@@ -123,11 +122,8 @@ export class Player implements Serializable<Player> {
     this.profilePic = json.profilePic;
 
     this.totalRank = json.totalRank;
-    // this.ageRank = json.ageRank;
-    // this.heightRank = json.heightRank;
-    // this.yrsPlayRank = json.yrsPlayRank;
-    // this.skillRank = json.skillRank;
-    // this.injuryRank = json.injuryRank;
+    this.dateCreated = json.dateCreated;
+    this.dateLastModified = json.dateLastModified;
 
     return this;
   }
@@ -140,7 +136,5 @@ export class Player implements Serializable<Player> {
     const dob = Date.parse(this.birthday);
     const timeDiff = Math.abs(Date.now() - dob);
     return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
-    //
-
   }
 }

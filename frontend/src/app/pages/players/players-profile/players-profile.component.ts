@@ -15,6 +15,7 @@ export class PlayersProfileComponent implements OnInit, OnDestroy {
 
   // testPlayer: Player;
   player: Player;
+  profilePic;
   zipcode: Zipcode;
 
   constructor(
@@ -42,10 +43,12 @@ export class PlayersProfileComponent implements OnInit, OnDestroy {
       .takeUntil(this.unsubscribe)
       .subscribe(player => {
         this.player = player;
+        console.log(this.player.profilePic);
+        this.profilePic = player.profilePic;
         this.zipcodeService.getZipcode(this.player.zipcode)
           .takeUntil(this.unsubscribe)
           .subscribe(zipcode => {
-            this.zipcode = zipcode;
+            this.player.zipcodeObj = zipcode;
           });
       });
   }
