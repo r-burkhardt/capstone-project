@@ -4,7 +4,7 @@
       <h2 class="player-profile-name">
         <!--Player Name<br />-->
         {{ player.firstName }} {{player.lastName}}<br />
-        <span class="small" *ngIf="zipcode">{{zipcode.city}}, {{zipcode.state}}</span>
+        <span class="small" *ngIf="player.zipcodeObj">{{player.zipcodeObj.city}}, {{player.zipcodeObj.state}}</span>
       </h2>
     </div>
   </div>

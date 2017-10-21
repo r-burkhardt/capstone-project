@@ -43,7 +43,6 @@ export class PlayersProfileComponent implements OnInit, OnDestroy {
       .takeUntil(this.unsubscribe)
       .subscribe(player => {
         this.player = player;
-        console.log(this.player.profilePic);
         this.profilePic = player.profilePic;
         this.zipcodeService.getZipcode(this.player.zipcode)
           .takeUntil(this.unsubscribe)

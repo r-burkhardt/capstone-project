@@ -3,6 +3,7 @@ import {Player, PlayerService} from '../../core/services/player.service';
 
 import { Subject } from 'rxjs/Subject';
 import {Zipcode, ZipcodeService} from '../../core/services/zipcode.service';
+import {allowPreviousPlayerStylesMerge} from '@angular/animations/browser/src/util';
 
 @Component({
   selector: 'app-players',
@@ -27,7 +28,14 @@ export class PlayersComponent implements OnInit {
       .takeUntil(this.unsubscribe)
       .subscribe(players => {
         this.allPlayers = players;
-        console.log(this.allPlayers);
+        // console.log(this.allPlayers);
+        this.allPlayers.forEach( player => {
+          this.zipcodeService.getZipcode(player.zipcode)
+            .takeUntil(this.unsubscribe)
+            .subscribe(zip => {
+              player.zipcodeObj = zip;
+            });
+        });
       });
     const playerId = '59c0355f4b10a131a71c3e4b';
     this.playerService.getPlayer(playerId)
@@ -38,14 +46,14 @@ export class PlayersComponent implements OnInit {
 
   }
 
-  getCityState(zipcode: any): string {
-    let zip: Zipcode;
-    this.zipcodeService.getZipcode(zipcode)
-      .takeUntil(this.unsubscribe)
-      .subscribe(rtrnZipcode => {
-        zip = rtrnZipcode;
-      });
-    return zip.city + ', ' + zip.state;
-  }
+  // getCityState(zipcode: any): string {
+  //   let zip: Zipcode;
+  //   this.zipcodeService.getZipcode(zipcode)
+  //     .takeUntil(this.unsubscribe)
+  //     .subscribe(rtrnZipcode => {
+  //       zip = rtrnZipcode;
+  //     });
+  //   return zip.city + ', ' + zip.state;
+  // }
 
 }
