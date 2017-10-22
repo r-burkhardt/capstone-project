@@ -85,7 +85,7 @@ export class Player implements Serializable<Player> {
   heightFeet = '';
   heightInch = '';
   yearsPlay = '';
-  injuries = '';
+  injuries = []; //'';
   pointAvg = '';
   about = '';
   profilePic = '';
@@ -136,5 +136,61 @@ export class Player implements Serializable<Player> {
     const dob = Date.parse(this.birthday);
     const timeDiff = Math.abs(Date.now() - dob);
     return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+  }
+
+  private calculateRank() {
+    const age = this.getAge();
+    const height = parseFloat(this.heightFeet) + (parseFloat(this.heightInch) / 12);
+    const yearsPlay = parseInt(this.yearsPlay);
+    const injuryCount = this.injuries.length;
+    const pointAvg = parseFloat(this.pointAvg);
+
+    let totalRank: number;
+
+    totalRank += this.getAgeRank(age);
+    totalRank += this.getHeightRank(height);
+    totalRank += 0; // this.getYearsPlayRank(yearsPlay);
+  }
+
+  private getAgeRank(age: number): number {
+    if ( age <= 20 ) {
+      return 5;
+    } else if ( age > 20 && age <= 25 ) {
+      return 4;
+    } else if ( age > 25 && age <= 30 ) {
+      return 3;
+    } else if ( age > 30 && age <= 35 ) {
+      return 2;
+    } else if ( age > 35 && age <= 40 ) {
+      return 1;
+    } else if ( age > 40 && age <= 45 ) {
+      return 0;
+    } else if ( age > 45 && age <= 50 ) {
+      return -1;
+    } else if ( age > 50 && age <= 55 ) {
+      return -2;
+    } else if ( age > 55) {
+      return -3;
+    } else {
+      return 0;
+    }
+  }
+
+  private getHeightRank(height: number): number {
+    if ( height < 4.5 ) {
+      return 0;
+    } else if ( height >= 4.5 && height < 5.0 ) {
+      return 1;
+    } else if ( height >= 5.0 && height < 5.5 ) {
+      return 2;
+    } else if ( height >= 5.5 && height < 6.0 ) {
+      return 3;
+    } else if ( height >= 6.0 && height < 6.5 ) {
+      return 4;
+    } else if ( height >= 6.5 ) {
+      return 5;
+    } else {
+      return 0;
+    }
   }
 }
