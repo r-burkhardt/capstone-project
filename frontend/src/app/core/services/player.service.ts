@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs/Observable';
 import {Zipcode} from './zipcode.service';
+import {until} from 'selenium-webdriver';
+import elementIsSelected = until.elementIsSelected;
 
 @Injectable()
 export class PlayerService {
@@ -71,7 +73,7 @@ export class PlayerService {
 export class Player implements Serializable<Player> {
 
   id = '';
-  userId = '';
+  userID = '';
   status = '';
   firstName = '';
   lastName = '';
@@ -81,7 +83,7 @@ export class Player implements Serializable<Player> {
   zipcodeObj = new Zipcode();
   latitude = '';
   longitude = '';
-  birthday = '';
+  dateOfBirth = '';
   heightFeet = '';
   heightInch = '';
   yearsPlay = '';
@@ -101,8 +103,9 @@ export class Player implements Serializable<Player> {
   }
 
   deserialize(json) {
+
     this.id = json.id;
-    this.userId = json.userId
+    this.userID = json.userID
     this.status = json.status;
     this.firstName = json.firstName;
     this.lastName = json.lastName;
@@ -112,13 +115,13 @@ export class Player implements Serializable<Player> {
     this.zipcodeObj = new Zipcode();
     this.latitude = json.latitude;
     this.longitude = json.longitude;
-    this.birthday = json.birthday;
+    this.dateOfBirth = json.dateOfBirth;
     this.heightFeet = json.heightFeet;
     this.heightInch = json.heightInch;
     this.yearsPlay = json.yearsPlay;
-    this.injuries = json.injuries;
+    this.injuries = json.injuries[0] === '' ? [] : json.injuries;
     this.pointAvg = json.pointAvg;
-    this.about = json.about;
+    this.about = json.about ? json.about : '';
     this.profilePic = json.profilePic;
 
     this.totalRank = json.totalRank;
@@ -133,26 +136,30 @@ export class Player implements Serializable<Player> {
   }
 
   getAge(): number {
-    const dob = Date.parse(this.birthday);
+    const dob = Date.parse(this.dateOfBirth);
     const timeDiff = Math.abs(Date.now() - dob);
     return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
   }
 
-  private calculateRank() {
+  calculateRank() {
     const age = this.getAge();
     const height = parseFloat(this.heightFeet) + (parseFloat(this.heightInch) / 12);
-    const yearsPlay = parseInt(this.yearsPlay);
+    const yearsPlay = parseFloat(this.yearsPlay); // parseInt(this.yearsPlay.substring(this.yearsPlay.length - 1), 10);
     const injuryCount = this.injuries.length;
     const pointAvg = parseFloat(this.pointAvg);
 
     let totalRank: number;
 
-    totalRank += this.getAgeRank(age);
+    totalRank = this.getAgeRank(age);
     totalRank += this.getHeightRank(height);
-    totalRank += 0; // this.getYearsPlayRank(yearsPlay);
+    totalRank += this.getYearsPlayRank(yearsPlay);
+    totalRank += this.getInjuryRank(injuryCount);
+    totalRank += this.getPointAvg(pointAvg);
+
+    this.totalRank = totalRank.toString();
   }
 
-  private getAgeRank(age: number): number {
+  private getAgeRank( age: number ): number {
     if ( age <= 20 ) {
       return 5;
     } else if ( age > 20 && age <= 25 ) {
@@ -176,7 +183,7 @@ export class Player implements Serializable<Player> {
     }
   }
 
-  private getHeightRank(height: number): number {
+  private getHeightRank( height: number ): number {
     if ( height < 4.5 ) {
       return 0;
     } else if ( height >= 4.5 && height < 5.0 ) {
@@ -193,4 +200,39 @@ export class Player implements Serializable<Player> {
       return 0;
     }
   }
+
+  private getYearsPlayRank( yearsPlay: number ): number {
+    if ( yearsPlay < 2 ) {
+      return 1;
+    } else if ( yearsPlay >= 2 && yearsPlay <= 5 ) {
+      return 2;
+    } else if ( yearsPlay > 5 ) {
+      return 3;
+    } else {
+      return 0;
+    }
+  }
+
+  private getInjuryRank( injuryCount: number ): number {
+    if ( injuryCount === 1 ) {
+      return -1;
+    } else if ( injuryCount === 2 ) {
+      return -2;
+    } else if ( injuryCount === 3 ) {
+      return -3;
+    } else if ( injuryCount === 4 ) {
+      return -4;
+    } else if ( injuryCount === 5 ) {
+      return -5;
+    } else {
+      return 0;
+    }
+
+}
+
+  private getPointAvg( pointAvg: number ): number {
+    return Math.round(pointAvg);
+  }
+
+
 }

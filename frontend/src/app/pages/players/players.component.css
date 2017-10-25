@@ -1,10 +1,19 @@
 #new-player-header {
   padding: 0;
   margin: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
-#new-player-header h4 {
-  padding-top: 0;
-  margin-top: 0;
-  line-height: 0;
+#new-player-header h3 {
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: hidden;
 }
