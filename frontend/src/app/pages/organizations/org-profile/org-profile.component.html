@@ -10,43 +10,41 @@
   <div class="row">
 
     <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-      <!--<div class="col-xs-12 col-sm-12 col-md-10">-->
-        <div class="row">
-            <label class="col-xs-3 col-sm-3 col-md-3 text-right">Primary Location:</label>
-            <span class="col-xs-9 col-sm-9 col-md-9">
-              {{org.street}}<br />
-              {{org.zipcodeObj.city}}, {{org.zipcodeObj.state}} {{org.zipcode}}
-            </span>
-        </div>
-        <div class="row">
-          <label class="col-xs-3 col-sm-3 col-md-3 text-right">Website:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{org.website}}</span>
-        </div>
-        <div class="row">
-          <label class="col-xs-3 col-sm-3 col-md-3 text-right">Email:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{org.email}}"</span>
-        </div>
-        <div class="row">
-          <label class="col-xs-3 col-sm-3 col-md-3 text-right">Phone:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{org.phone}}</span>
-        </div>
-        <div class="row">
-          <label class="col-xs-3 col-sm-3 col-md-3 text-right">Contact:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{org.contact}}</span>
-        </div>
-        <div class="row">
-          <label class="col-xs-3 col-sm-3 col-md-3 text-right">Open Gym:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">Open Gym</span>
-        </div>
-        <div class="row">
-          <label class="col-xs-3 col-sm-3 col-md-3 text-right">League:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">League</span>
-        </div>
-        <div class="row">
-          <label class="col-xs-3 col-sm-3 col-md-3 text-right">About:</label>
-          <span class="col-xs-9 col-sm-9 col-md-9">{{org.about}}</span>
-        </div>
-      <!--</div>-->
+      <div class="row">
+          <label class="col-xs-3 col-sm-3 col-md-3 text-right">Primary Location:</label>
+          <span class="col-xs-9 col-sm-9 col-md-9">
+            {{org.street}}<br />
+            {{org.zipcodeObj.city}}, {{org.zipcodeObj.state}} {{org.zipcode}}
+          </span>
+      </div>
+      <div class="row">
+        <label class="col-xs-3 col-sm-3 col-md-3 text-right">Website:</label>
+        <span class="col-xs-9 col-sm-9 col-md-9">{{org.website}}</span>
+      </div>
+      <div class="row">
+        <label class="col-xs-3 col-sm-3 col-md-3 text-right">Email:</label>
+        <span class="col-xs-9 col-sm-9 col-md-9">{{org.email}}</span>
+      </div>
+      <div class="row">
+        <label class="col-xs-3 col-sm-3 col-md-3 text-right">Phone:</label>
+        <span class="col-xs-9 col-sm-9 col-md-9">{{org.phone}}</span>
+      </div>
+      <div class="row">
+        <label class="col-xs-3 col-sm-3 col-md-3 text-right">Contact:</label>
+        <span class="col-xs-9 col-sm-9 col-md-9">{{org.contact}}</span>
+      </div>
+      <div class="row">
+        <label class="col-xs-3 col-sm-3 col-md-3 text-right">Open Gym:</label>
+        <span class="col-xs-9 col-sm-9 col-md-9">Open Gym</span>
+      </div>
+      <div class="row">
+        <label class="col-xs-3 col-sm-3 col-md-3 text-right">League:</label>
+        <span class="col-xs-9 col-sm-9 col-md-9">League</span>
+      </div>
+      <div class="row">
+        <label class="col-xs-3 col-sm-3 col-md-3 text-right">About:</label>
+        <span class="col-xs-9 col-sm-9 col-md-9">{{org.about}}</span>
+      </div>
     </div>
     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
       <div class="thumbnail" *ngIf="org.logo; else defaultLogo">

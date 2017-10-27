@@ -8,7 +8,7 @@ $topnav-background-color: white;
   left: 0;
   right: 0;
   bottom: 0;
-  overflow: auto;
+  //overflow: auto;
   background: $topnav-background-color;
   text-align: center;
   color: rgb(0,37,53);
@@ -67,6 +67,10 @@ input::-webkit-input-placeholder {
   color: rgba(0,37,53,.6) !important;
 }
 
+label {
+  display: inline-block;
+}
+
 input:-moz-placeholder { /* Firefox 18- */
   color: rgba(255,255,255,0.6) !important;
 }
@@ -82,14 +86,14 @@ input:-ms-input-placeholder {
 .form-content {
   padding: 40px 0;
 }
-  .dropdowns{
-    height: 46px;
-    width: 150px;
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.3333333;
-    border-radius: 0;
-  }
+  //.dropdowns{
+  //  height: 46px;
+  //  width: 150px;
+  //  padding: 10px 16px;
+  //  font-size: 18px;
+  //  line-height: 1.3333333;
+  //  border-radius: 0;
+  //}
   .descriptionlabel{
     font-size: 18px;
     font-weight:normal;
