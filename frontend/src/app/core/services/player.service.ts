@@ -144,8 +144,7 @@ export class Player implements Serializable<Player> {
   getExperience(): string {
     const timeDiff = Math.abs(Date.now() - Date.parse(this.dateCreated));
     const timeDiffYears = Math.floor((timeDiff / ( 1000 * 3600 * 24 )) / 365 );
-    return parseInt(this.yearsPlay) == 5 ? this.yearsPlay + timeDiffYears : this.yearsPlay;
-    // return "";
+    return parseInt(this.yearsPlay, 10) === 5 ? this.yearsPlay + timeDiffYears : this.yearsPlay;
   }
 
   calculateRank() {
