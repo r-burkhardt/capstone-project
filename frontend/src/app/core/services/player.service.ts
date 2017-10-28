@@ -138,7 +138,14 @@ export class Player implements Serializable<Player> {
   getAge(): number {
     const dob = Date.parse(this.dateOfBirth);
     const timeDiff = Math.abs(Date.now() - dob);
-    return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+    return Math.floor((timeDiff / ( 1000 * 3600 * 24)) / 365 );
+  }
+
+  getExperience(): string {
+    const timeDiff = Math.abs(Date.now() - Date.parse(this.dateCreated));
+    const timeDiffYears = Math.floor((timeDiff / ( 1000 * 3600 * 24 )) / 365 );
+    return parseInt(this.yearsPlay) == 5 ? this.yearsPlay + timeDiffYears : this.yearsPlay;
+    // return "";
   }
 
   calculateRank() {
