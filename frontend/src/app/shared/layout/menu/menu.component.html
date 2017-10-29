@@ -1,22 +1,28 @@
 <div class="container-fluid">
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-expand navbar-light bg-info">  <!--navbar-default">-->
     <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-left">
-        <li role="presentation" routerLinkActive="active"
+      <ul class="navbar-nav mr-auto">
+        <!--<ul class="nav navbar-nav navbar-left">-->
+        <li class="nav-item" role="presentation" routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}">
-          <a routerLink="/" >Home</a>
+          <a class="nav-link" routerLink="/" >Home</a>
         </li>
-        <li role="presentation" routerLinkActive="active">
-          <a routerLink="/organizations">Organizations</a>
+        <li class="nav-item" role="presentation" routerLinkActive="active">
+          <a class="nav-link" routerLink="/organizations">Organizations</a>
         </li>
-        <li role="presentation" routerLinkActive="active">
-          <a routerLink="/players">Players</a>
+        <li class="nav-item" role="prsesentation" routerLinkActive="active">
+          <a class="nav-link" routerLink="/players">Players</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li role="presentation"><a routerLink="/login">Login</a></li>
-        <li role="presentation"><a routerLink="/sign-up">Sign Up</a></li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" routerLink="/sign-up">Sign Up</a>
+        </li>
       </ul>
     </div>
   </nav>
+  <p></p>
 </div>
