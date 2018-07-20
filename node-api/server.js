@@ -48,7 +48,6 @@ if (env_value === "undefined") {
             break;
             
         case "PROD":
-            // mongodbURL = "mongodb://127.0.0.1:27017/teambuilder";
             mongodbURL = "mongodb://" + apiAccess + ":" + apiToken + "@127.0.0.1:27017/teambuilder";
             console.log("enviroment = " + mongodbURL);
             break;
