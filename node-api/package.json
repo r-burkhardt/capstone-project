@@ -1,5 +1,5 @@
 {
-  "name": "teambuilder-api",
+  "name": "teambuilderApi",
   "version": "1.0.0",
   "description": "This is the api for teambuilder app to access the application data",
   "main": "server.js",
@@ -11,9 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "assert": "^1.4.1",
-    "body-parser": "^1.18.1",
-    "date.format.js": "^1.1.3",
-    "express": "^4.15.4",
-    "mongodb": "^2.2.31"
+    "body-parser": "^1.18.3",
+    "date.format.js": "^1.1.5",
+    "express": "^4.16.3",
+    "mongodb": "^2.2.36"
   }
 }
