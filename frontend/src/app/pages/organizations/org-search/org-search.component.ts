@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Organization, OrganizationService} from '../../../core/services/organization.service';
 import { ZipcodeService } from '../../../core/services/zipcode.service';
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-org-search',
@@ -29,12 +29,12 @@ export class OrgSearchComponent implements OnInit {
   createSearchResults() {
     const orgParameters = {};
     this.organizationService.getAllOrganizations(orgParameters)
-      .takeUntil(this.unsubscribe)
+      // .takeUntil(this.unsubscribe)
       .subscribe(organizations => {
         this.searchResults = organizations;
         this.searchResults.forEach( org => {
           this.zipcodeService.getZipcode(org.zipcode)
-            .takeUntil(this.unsubscribe)
+            // .takeUntil(this.unsubscribe)
             .subscribe(zip => {
               org.zipcodeObj = zip;
             });
@@ -53,6 +53,7 @@ export class OrgSearchComponent implements OnInit {
     // org1.phone = "";
     // org1.contact = "Justin Seiter";
     // org1.logo = "sfgba.jpg";
+    // tslint:disable-next-line:max-line-length
     // org1.about = "The San Francisco Gay Basketball Association has seen hundreds of players pass through its doors over the last 30 years — highly skilled and less skilled; men and women; every race and creed; gay, straight and transgender. Diversity and inclusion has been one of our program’s hallmarks. Throughout this history, though, there has been one amazing constant for whom we are most thankful — our founder and perennial leader Tony Jasinski.<br /> Since launching our program in 1986, he has battled with city officials to get us established, developed great relationships with many of those same officials, navigated us through multiple gym locations, showed great care during loss in our community, ran our league for almost nine years and taken great pride in helping make San Francisco Gay Basketball the longest running and most successful Gay hoops program in the world. He is our rock. He is not one of the elite players, as he is the first to admit, so his participation is not a matter of ego. He has been dedicated to helping develop and support younger and less-skilled players and building our community — often digging into his own pockets to do so.<br /> Tony has been a great supporter of Gay basketball around the world, often helping advise programs in their infancy. His remarkable contributions to this sport were recognized when he was elected as an inaugural member of the Chicago Hoops Classic Hall of Fame in 2000. He has also helped support the Gay Games movement by serving for a number of years as a Treasurer and Board Member of Team San Francisco and as a Delegate to the international Federation of Gay Games.";
     //
     // let org2: Organization = new Organization();

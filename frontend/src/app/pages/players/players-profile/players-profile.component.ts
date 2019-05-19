@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Player, PlayerService } from '../../../core/services/player.service';
 import { Zipcode, ZipcodeService } from '../../../core/services/zipcode.service';
 
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -40,13 +40,13 @@ export class PlayersProfileComponent implements OnInit, OnDestroy {
 
   getPlayer(id: string) {
     this.playerService.getPlayer(id)
-      .takeUntil(this.unsubscribe)
+      // .takeUntil(this.unsubscribe)
       .subscribe(player => {
         this.player = player;
         this.player.calculateRank();
         this.profilePic = player.profilePic;
         this.zipcodeService.getZipcode(this.player.zipcode)
-          .takeUntil(this.unsubscribe)
+          // .takeUntil(this.unsubscribe)
           .subscribe(zipcode => {
             this.player.zipcodeObj = zipcode;
           });

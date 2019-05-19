@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Organization, OrganizationService} from '../../../core/services/organization.service';
 
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ZipcodeService } from '../../../core/services/zipcode.service';
 
@@ -37,11 +37,11 @@ export class OrgProfileComponent implements OnInit, OnDestroy {
 
   getOrg(id: string) {
     this.organizationService.getOrganization(id)
-      .takeUntil(this.unsubscribe)
+      // .takeUntil(this.unsubscribe)
       .subscribe(organization => {
         this.org = organization;
         this.zipcodeService.getZipcode(this.org.zipcode)
-          .takeUntil(this.unsubscribe)
+          // .takeUntil(this.unsubscribe)
           .subscribe(zipcode => {
             this.org.zipcodeObj = zipcode;
           });

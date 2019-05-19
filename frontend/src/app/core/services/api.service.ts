@@ -1,38 +1,42 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { apiConfig } from '../api.config';
 
-import {Observable} from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/delay';
-import 'rxjs/add/operator/do';
+import {throwError as observableThrowError, Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { apiConfig } from '../api.config';
+import { catchError } from 'rxjs/operators';
+
+
+
+
 
 @Injectable()
 export class ApiService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public get(uri): Observable<any> {
     return this.http.get(this.getBaseUrl() + '/' + uri, { headers: this.getHeaders() })
-      .map(this.handleData)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
+      // .map(this.handleData)
+      // .catch(this.handleError);
   }
 
   public post(uri: string, body: string): Observable<any> {
     const headers = this.getHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.getBaseUrl() + '/' + uri, body, { headers: headers })
-      .map(this.handleData)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
+      // .map(this.handleData)
+      // .catch(this.handleError);
   }
 
   public put(uri: string, body: string): Observable<any> {
     const headers = this.getHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.put(this.getBaseUrl() + '/' + uri, body, { headers: headers })
-      .map(this.handleData)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
+      // .map(this.handleData)
+      // .catch(this.handleError);
   }
 
   public remoteCall(methodName: string, param: string): Observable<any> {
@@ -79,13 +83,13 @@ export class ApiService {
     return apiConfig.restApiUrl;
   }
 
-  private getHeaders(): Headers {
+  private getHeaders(): HttpHeaders {
     // const conn = new jsforce.Connection({
     //   accessToken: apiConfig.accessToken,
     //   instanceUrl: apiConfig.loginServer
     // });
     //
-    const headers = new Headers();
+    const headers = new HttpHeaders();
     // headers.append("Authorization", "Bearer " + conn.accessToken);
     return headers;
     // return null;
@@ -93,12 +97,12 @@ export class ApiService {
 
   private handleData(response: Response) {
     const body = response.json();
-    if (body) {
-      return body.data || body;
-
-    } else {
-      return {};
-    }
+    // if (body) {
+    //   return body.data || body;
+    //
+    // } else {
+    //   return {};
+    // }
   }
 
   private handleError(error: any) {
@@ -113,6 +117,6 @@ export class ApiService {
       console.error('More Info: ', body['moreInfo']);
     }
 
-    return Observable.throw(error);
+    return observableThrowError(error);
   }
 }

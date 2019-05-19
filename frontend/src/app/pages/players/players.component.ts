@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Player, PlayerService} from '../../core/services/player.service';
 
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import {Zipcode, ZipcodeService} from '../../core/services/zipcode.service';
 import {allowPreviousPlayerStylesMerge} from '@angular/animations/browser/src/util';
 
@@ -25,13 +25,13 @@ export class PlayersComponent implements OnInit {
 
     const playerParameters = {};
     this.playerService.getAllPlayers(playerParameters)
-      .takeUntil(this.unsubscribe)
+      // .takeUntil(this.unsubscribe)
       .subscribe(players => {
         this.allPlayers = players;
         // console.log(this.allPlayers);
         this.allPlayers.forEach( player => {
           this.zipcodeService.getZipcode(player.zipcode)
-            .takeUntil(this.unsubscribe)
+            // .takeUntil(this.unsubscribe)
             .subscribe(zip => {
               player.zipcodeObj = zip;
             });

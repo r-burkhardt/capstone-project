@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {Zipcode} from './zipcode.service';
 import {until} from 'selenium-webdriver';
+import { map } from 'rxjs/operators'
 import elementIsSelected = until.elementIsSelected;
 
 @Injectable()
@@ -20,7 +21,7 @@ export class PlayerService {
     //   observable = this.apiService.get(uri);
     // }
 
-    return observable.map(response => {
+    return observable.pipe(map(response => {
       const data = response;
       // if (response.result) {
       //   console.log(response);
@@ -33,7 +34,7 @@ export class PlayerService {
       // data = response;
 
       return new Player().deserialize(data);
-    });
+    }));
   }
 
   getAllPlayers(params): Observable<Player[]> {
@@ -87,7 +88,7 @@ export class Player implements Serializable<Player> {
   heightFeet = '';
   heightInch = '';
   yearsPlay = '';
-  injuries = []; //'';
+  injuries = []; // '';
   pointAvg = '';
   about = '';
   profilePic = '';

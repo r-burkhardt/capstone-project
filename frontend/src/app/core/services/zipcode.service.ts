@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ZipcodeService {
@@ -15,11 +16,11 @@ export class ZipcodeService {
 
     const observable = this.apiService.get(uri);
 
-    return observable.map(response => {
+    return observable.pipe(map(response => {
       const data = response;
 
       return new Zipcode().deserialize(data);
-    });
+    }));
   }
 }
 
