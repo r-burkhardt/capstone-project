@@ -1,5 +1,5 @@
-module.exports = function(app) {
-    var playerController = require('../controllers/player');
+module.exports = ( app ) => {
+    const playerController = require('../controllers/player');
 
     app.get('/services/v1/player', playerController.getAllPlayer);
     // app.get('/service/v1/player/:orgId/:eventId'); // get players checked into event with organization
@@ -11,3 +11,6 @@ module.exports = function(app) {
     
     playerController.setDBConnectionsFromApp(app);
 }
+
+
+

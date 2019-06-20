@@ -1,14 +1,13 @@
-var dbConnection;
-var collection;
+const ObjectID = require( 'mongodb' ).ObjectID;
+let collection;
 
-exports.setDBConnectionsFromApp = function (app) {
-    dbConnection = app.get("dbConnection");
-    collection = dbConnection.collection("zipcode");
+exports.setDBConnectionsFromApp = (app) => {
+    collection = app.get( 'db' ).collection( 'zipcode' );
 }
 
-exports.getAllZipcode = function (req, res) {
+exports.getAllZipcode = (req, res) => {
     
-    var zipcodes = collection.find({}, function (err, docsCursor) {
+    collection.find({}, (err, docsCursor) => {
         res.type('application/json');
         if (err) {
             res.status(500);
@@ -36,9 +35,9 @@ exports.getAllZipcode = function (req, res) {
     });
 }
 
-exports.getZipcode = function (req, res) {
+exports.getZipcode = (req, res) => {
 
-    var zipcodes = collection.findOne({"zip": parseInt(req.params.zip)}, function (err, zipcode) {
+    collection.findOne({"zip": parseInt(req.params.zip)}, (err, zipcode) => {
         res.type('application/json');
 
         if (zipcode != null) {
@@ -58,9 +57,9 @@ exports.getZipcode = function (req, res) {
     });
 }
 
-exports.getLatLong = function (req, res) {
+exports.getLatLong = (req, res) => {
     
-    var zipcodes = collection.findOne({"zip": parseInt(req.params.zip)}, function (err, zipcode) {
+    collection.findOne({"zip": parseInt(req.params.zip)}, (err, zipcode) => {
         if (zipcode != null) {
             var zipLoc = {};
             var latLong = [];

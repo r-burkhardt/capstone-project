@@ -1,14 +1,12 @@
-var dbConnection;
-var collection;
+const ObjectID = require( 'mongodb' ).ObjectID;
+let collection;
 
-exports.setDBConnectionsFromApp = function (app) {
-    dbConnection = app.get("dbConnection");
-    userCollection = dbConnection.collection("zipcodes");
+exports.setDBConnectionsFromApp = (app) => {
+    collection = app.get( 'db' ).collection( 'zipcodes' );
 
 }
 
-exports.authorize = function (req, res) {
-    var users = collection
+exports.authorize = (req, res) => {
 }
 
 // authenticate
