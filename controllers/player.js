@@ -1,81 +1,64 @@
-var dbConnection;
 var collection;
-var ObjectID = require('mongodb').ObjectID;
+var ObjectId = require('mongodb').ObjectId;
 
 exports.setDBConnectionsFromApp = function (app) {
-    dbConnection = app.get("dbConnection");
-    collection = dbConnection.collection("player");
+    collection = app.get("dbConnection").collection("player");
 }
 
-exports.getAllPlayer = function (req, res) {
-    var players = collection.find({}, function (err, docsCursor) {
+exports.getAllPlayer = async function (req, res) {
+    try {
         res.type('application/json');
-        if (err) {
-            res.status(500);
-            res.send({success:false, msg:"Database error"});
-            return;
-        }
+        var docs = await collection.find({}).toArray();
 
         var playerList = [];
-        docsCursor.each(function (err, player) {
-            if (player != null) {
-                var newPlayer = {};
-                newPlayer.id = player._id;
-                newPlayer.userID = player.userID; // used to connect player profile to user account
-                newPlayer.status = player.status;
-                newPlayer.firstName = player.firstName;
-                newPlayer.lastName = player.lastName;
-                newPlayer.email = player.email;
-                newPlayer.phone = player.phone;
-                newPlayer.zipcode = player.zipcode;
-                newPlayer.latitude = player.latLong[0];
-                newPlayer.longitude = player.latLong[1];
-                newPlayer.dateOfBirth = player.dateOfBirth;
-                newPlayer.heightFeet = player.height[0];
-                newPlayer.heightInch = player.height[1];
-                newPlayer.yearsPlay = player.yearsPlay;
-                // Loop through injuries to add to injury item
-                // var i;
-                var injuryList = [];
-                for (i = 0; i < player.injuries.length; i++) {
-                    injuryList.push( player.injuries[ i ]);
-                }
-                newPlayer.injuries = injuryList;
-                newPlayer.pointAvg = player.pointAvg;
-                // Player ranking
-                newPlayer.totalRank = player.totalRank;
-                // newPlayer.ageRank = player.ageRank;
-                // newPlayer.heightRank = player.heightRank;
-                // newPlayer.yrsPlayRank = player.yrsPlayRank;
-                // newPlayer.skillRank = player.skillRank;
-                // newPlayer.injuryRank = player.injuryRank;
-                // Player modifications
-                newPlayer.dateCreated = player.dateCreated;
-                newPlayer.dateLastModified = player.dateLastModified;
-    
-                // console.log((new Date() - new Date(player.dateOfBirth))/1000/60/60/24/365);
+        for (var i = 0; i < docs.length; i++) {
+            var player = docs[i];
+            var newPlayer = {};
+            newPlayer.id = player._id;
+            newPlayer.userID = player.userID; // used to connect player profile to user account
+            newPlayer.status = player.status;
+            newPlayer.firstName = player.firstName;
+            newPlayer.lastName = player.lastName;
+            newPlayer.email = player.email;
+            newPlayer.phone = player.phone;
+            newPlayer.zipcode = player.zipcode;
+            newPlayer.latitude = player.latLong[0];
+            newPlayer.longitude = player.latLong[1];
+            newPlayer.dateOfBirth = player.dateOfBirth;
+            newPlayer.heightFeet = player.height[0];
+            newPlayer.heightInch = player.height[1];
+            newPlayer.yearsPlay = player.yearsPlay;
+            newPlayer.injuries = player.injuries.slice();
+            newPlayer.pointAvg = player.pointAvg;
+            // Player ranking
+            newPlayer.totalRank = player.totalRank;
+            // Player modifications
+            newPlayer.dateCreated = player.dateCreated;
+            newPlayer.dateLastModified = player.dateLastModified;
 
-                playerList.push(newPlayer);
-            } else {
-                res.status(200);
-                res.json({players : playerList});
-            }
-        });
-    });
+            playerList.push(newPlayer);
+        }
+        res.status(200);
+        res.json({players : playerList});
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
 
-exports.getPlayer = function (req, res) {
+exports.getPlayer = async function (req, res) {
     var objID;
     try {
-        objID = ObjectID(req.params.id);
+        objID = new ObjectId(req.params.id);
     } catch (e) {
         res.status(500);
         res.send({success:false, msg:"Invalid id"});
         return;
     }
 
-    var players = collection.findOne({"_id": objID}, function (err, player) {
+    try {
         res.type('application/json');
+        var player = await collection.findOne({"_id": objID});
 
         if (player != null) {
             var newPlayer = {};
@@ -93,96 +76,71 @@ exports.getPlayer = function (req, res) {
             newPlayer.heightFeet = player.height[0];
             newPlayer.heightInch = player.height[1];
             newPlayer.yearsPlay = player.yearsPlay;
-            // Loop through injuries to add to injury item
-            // var i;
-            var injuryList = [];
-            for (i = 0; i < player.injuries.length; i++) {
-                injuryList.push( player.injuries[ i ]);
-            }
-            newPlayer.injuries = injuryList;
+            newPlayer.injuries = player.injuries.slice();
             newPlayer.pointAvg = player.pointAvg;
             // Player ranking
             newPlayer.totalRank = player.totalRank;
-            // newPlayer.ageRank = player.ageRank;
-            // newPlayer.heightRank = player.heightRank;
-            // newPlayer.yrsPlayRank = player.yrsPlayRank;
-            // newPlayer.skillRank = player.skillRank;
-            // newPlayer.injuryRank = player.injuryRank;
             // Player modifications
             newPlayer.dateCreated = player.dateCreated;
             newPlayer.dateLastModified = player.dateLastModified;
-            
+
             res.status(200);
             res.json(newPlayer);
         } else {
             res.status(400);
             res.json({success:false, msg:"Player not found"});
         }
-    });
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
 
-exports.getPlayerNearBy = function (req, res) {
+exports.getPlayerNearBy = async function (req, res) {
     var latitude = req.params.lat;
     var longitude = req.params.long;
     var distance = ((req.params.distance * 1.60934 ) / 6371 ); // distance in miles divided by 3959, in km / 6371
-    console.log(distance);
-    
-    var players = collection.find({"latLong":{$near:[parseFloat(latitude), parseFloat(longitude)], $maxDistance: parseFloat(distance)}}, function (err, docsCursor) {
+    try {
         res.type('application/json');
-        if (err) {
-            res.status(500);
-            res.send({success:false, msg:"Database error."});
-            return;
-        }
+        var docs = await collection.find({"latLong":{$near:[parseFloat(latitude), parseFloat(longitude)], $maxDistance: parseFloat(distance)}}).toArray();
 
         var playerList = [];
-        docsCursor.each(function (err, player) {
-            if (player != null) {
-                var newPlayer = {};
-                newPlayer.id = player._id;
-                newPlayer.userID = player.userID; // used to connect player profile to user account
-                newPlayer.status = player.status;
-                newPlayer.firstName = player.firstName;
-                newPlayer.lastName = player.lastName;
-                newPlayer.email = player.email;
-                newPlayer.phone = player.phone;
-                newPlayer.zipcode = player.zipcode;
-                newPlayer.latitude = player.latLong[0];
-                newPlayer.longitude = player.latLong[1];
-                newPlayer.dateOfBirth = player.dateOfBirth;
-                newPlayer.heightFeet = player.height[0];
-                newPlayer.heightInch = player.height[1];
-                newPlayer.yearsPlay = player.yearsPlay;
-                // Loop through injuries to add to injury item
-                // var i;
-                var injuryList = [];
-                for (i = 0; i < player.injuries.length; i++) {
-                    injuryList.push( player.injuries[ i ]);
-                }
-                newPlayer.injuries = injuryList;
-                newPlayer.pointAvg = player.pointAvg;
-                // Player ranking
-                newPlayer.totalRank = player.totalRank;
-                // newPlayer.ageRank = player.ageRank;
-                // newPlayer.heightRank = player.heightRank;
-                // newPlayer.yrsPlayRank = player.yrsPlayRank;
-                // newPlayer.skillRank = player.skillRank;
-                // newPlayer.injuryRank = player.injuryRank;
-                // Player modifications
-                newPlayer.dateCreated = player.dateCreated;
-                newPlayer.dateLastModified = player.dateLastModified;
-                
-                playerList.push(newPlayer);
-            } else {
-                res.status(200);
-                res.json({players : playerList});
-            }
-        });
-    });
+        for (var i = 0; i < docs.length; i++) {
+            var player = docs[i];
+            var newPlayer = {};
+            newPlayer.id = player._id;
+            newPlayer.userID = player.userID; // used to connect player profile to user account
+            newPlayer.status = player.status;
+            newPlayer.firstName = player.firstName;
+            newPlayer.lastName = player.lastName;
+            newPlayer.email = player.email;
+            newPlayer.phone = player.phone;
+            newPlayer.zipcode = player.zipcode;
+            newPlayer.latitude = player.latLong[0];
+            newPlayer.longitude = player.latLong[1];
+            newPlayer.dateOfBirth = player.dateOfBirth;
+            newPlayer.heightFeet = player.height[0];
+            newPlayer.heightInch = player.height[1];
+            newPlayer.yearsPlay = player.yearsPlay;
+            newPlayer.injuries = player.injuries.slice();
+            newPlayer.pointAvg = player.pointAvg;
+            // Player ranking
+            newPlayer.totalRank = player.totalRank;
+            // Player modifications
+            newPlayer.dateCreated = player.dateCreated;
+            newPlayer.dateLastModified = player.dateLastModified;
+
+            playerList.push(newPlayer);
+        }
+        res.status(200);
+        res.json({players : playerList});
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
 
-exports.createPlayer = function (req, res) {
-    
+exports.createPlayer = async function (req, res) {
     var player = req.body;
     var newPlayer = {};
     newPlayer.userID = player.userID; // used to connect player profile to user account
@@ -200,89 +158,81 @@ exports.createPlayer = function (req, res) {
     newPlayer.pointAvg = player.pointAvg;
     // Player ranking
     newPlayer.totalRank = player.totalRank;
-    // newPlayer.ageRank = player.ageRank;
-    // newPlayer.heightRank = player.heightRank;
-    // newPlayer.yrsPlayRank = player.yrsPlayRank;
-    // newPlayer.skillRank = player.skillRank;
-    // newPlayer.injuryRank = player.injuryRank;
-    newPlayer.dateCreated = new Date ().format ( 'c' );
-    newPlayer.dateLastModified = new Date ().format ( 'c' );
+    newPlayer.dateCreated = new Date().toISOString();
+    newPlayer.dateLastModified = new Date().toISOString();
 
-    // Add possible check feature here around insert
-    var players = collection.insertOne ( newPlayer, function ( err, returnPlayer ) {
-        res.type ( 'application/json' );
-    
-        if ( returnPlayer != null ) {
-            res.status ( 201 );
-            res.json ( { success:true, msg: "Player Created" } );
+    try {
+        res.type('application/json');
+        var result = await collection.insertOne(newPlayer);
+
+        if (result.acknowledged) {
+            res.status(201);
+            res.json({ success:true, msg: "Player Created" });
         } else {
-            res.status ( 400 );
-            res.json ( { success: false, msg: "Player creation failed" } );
+            res.status(400);
+            res.json({ success: false, msg: "Player creation failed" });
         }
-    });
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
 
-exports.updatePlayer = function (req, res) {
+exports.updatePlayer = async function (req, res) {
     var player = req.body;
-    player.dateLastModified = new Date().format('c'); //parseInt(Date.now() / 1000, 10);
+    player.dateLastModified = new Date().toISOString();
 
     // Check for valid objectID
     var objID;
     try {
-        objID = ObjectID(req.params.id);
+        objID = new ObjectId(req.params.id);
     } catch(e) {
         res.status(500);
         res.send({success:false, msg:"Invalid player id"});
         return;
     }
 
-    var players = collection.update({"_id": objID}, {"$set": player}, function ( err, result ) {
+    try {
         res.type('application/json');
+        var result = await collection.updateOne({"_id": objID}, {"$set": player});
 
-        if ( result == null ) {
+        if (result == null) {
             res.status(400);
             res.send({success:false, msg:"Player update failed"});
             return;
         }
         res.status(200);
-        res.json({sucess:true, msg:"Player updated successfully"});
-    });
+        res.json({success:true, msg:"Player updated successfully"});
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
 
-exports.deletePlayer = function (req, res) {
+exports.deletePlayer = async function (req, res) {
     // Check for valid objectID
     var objID;
     try {
-        objID = ObjectID(req.params.id);
+        objID = new ObjectId(req.params.id);
     } catch(e) {
         res.status(500);
         res.send({success:false, msg:"Invalid player id"});
         return;
     }
-    
-    var players = collection.remove({"_id": objID}, function ( err, status ) {
+
+    try {
         res.type('application/json');
-        
-        if (status.result.n == 0) {
+        var result = await collection.deleteOne({"_id": objID});
+
+        if (result.deletedCount === 0) {
             res.status(400);
             res.send({success:false, msg:"Player deletion failed"});
             return;
         }
         res.status(200);
-        res.json({sucess:true, msg:"Player deletion successful"})
-    });
+        res.json({success:true, msg:"Player deletion successful"})
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

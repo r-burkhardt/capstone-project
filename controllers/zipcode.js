@@ -1,45 +1,39 @@
-var dbConnection;
 var collection;
 
 exports.setDBConnectionsFromApp = function (app) {
-    dbConnection = app.get("dbConnection");
-    collection = dbConnection.collection("zipcode");
+    collection = app.get("dbConnection").collection("zipcode");
 }
 
-exports.getAllZipcode = function (req, res) {
-    
-    var zipcodes = collection.find({}, function (err, docsCursor) {
+exports.getAllZipcode = async function (req, res) {
+    try {
         res.type('application/json');
-        if (err) {
-            res.status(500);
-            res.send({success:false, msg:"Database Error"});
-            return;
-        }
+        var docs = await collection.find({}).toArray();
 
         var zipList = [];
-        docsCursor.each(function (err, zipcode) {
-            if (zipcode != null) {
-                var newZipcode = {};
-                newZipcode.id = zipcode._id;
-                newZipcode.zip = zipcode.zip;
-                newZipcode.city = zipcode.city;
-                newZipcode.state = zipcode.state;
-                newZipcode.latitude = zipcode.latitude;
-                newZipcode.longitude = zipcode.longitude;
+        for (var i = 0; i < docs.length; i++) {
+            var zipcode = docs[i];
+            var newZipcode = {};
+            newZipcode.id = zipcode._id;
+            newZipcode.zip = zipcode.zip;
+            newZipcode.city = zipcode.city;
+            newZipcode.state = zipcode.state;
+            newZipcode.latitude = zipcode.latitude;
+            newZipcode.longitude = zipcode.longitude;
 
-                zipList.push(newZipcode);
-            } else {
-                res.status(200);
-                res.json({zipcodes : zipList});
-            }
-        });
-    });
+            zipList.push(newZipcode);
+        }
+        res.status(200);
+        res.json({zipcodes : zipList});
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
 
-exports.getZipcode = function (req, res) {
-
-    var zipcodes = collection.findOne({"zip": parseInt(req.params.zip)}, function (err, zipcode) {
+exports.getZipcode = async function (req, res) {
+    try {
         res.type('application/json');
+        var zipcode = await collection.findOne({"zip": parseInt(req.params.zip)});
 
         if (zipcode != null) {
             var newZipcode = {};
@@ -55,12 +49,16 @@ exports.getZipcode = function (req, res) {
             res.status(400);
             res.json({success:false, msg:"Zipcode not found"});
         }
-    });
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
 
-exports.getLatLong = function (req, res) {
-    
-    var zipcodes = collection.findOne({"zip": parseInt(req.params.zip)}, function (err, zipcode) {
+exports.getLatLong = async function (req, res) {
+    try {
+        var zipcode = await collection.findOne({"zip": parseInt(req.params.zip)});
+
         if (zipcode != null) {
             var zipLoc = {};
             var latLong = [];
@@ -73,5 +71,8 @@ exports.getLatLong = function (req, res) {
             res.status(400);
             res.json({success:false, msg:"Zipcode not found"});
         }
-    });
+    } catch (err) {
+        res.status(500);
+        res.send({success:false, msg:"Database error"});
+    }
 }
